@@ -173,9 +173,9 @@ def fill_value(num): #function to input number in cell
 							width = rectangle[1][2]
 							height = rectangle[1][3]
 
-
-							rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width, height))
 							outline = pygame.draw.rect(screen, (0,0,0), pygame.Rect(left - 1, top - 1, width+2, height+2))
+							rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width, height))
+							
 							# use draw_rectangle for these 
 
 							text_surface = font.render(str(num), True, (0,0,255))

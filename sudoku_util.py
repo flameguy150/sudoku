@@ -67,10 +67,11 @@ class Cell:
 		# color = (255,0,0)
 		if color == None:
 			color = (255,255,255)
-		left = self.left
-		top = self.top
-		width = self.width
-		height = self.height
+
+		left = self.left #+ 1
+		top = self.top 
+		width = self.width 
+		height = self.height 
 		
 		index = cells.index(self)
 
@@ -83,50 +84,60 @@ class Cell:
 		cell = Cell(left, top, width, height)
 		cell.rect = cell_rect
 		# cells.append(cell) #TIME TO REPLACE
-		print(index)
+		
+		
+		if num == None:
+			# don't font.render
+			pass
+		else:
+			text_surface = font.render(str(num), True, (0,0,255))
+			screen.blit(text_surface, cell_rect)#replace rectangle with new white rectangle w number
+
+		# print(index)
 		cells[index] = cell
 		# self.info.rect = cell
 		number_of_cells += 1
 
-		text_surface = font.render(str(num), True, (0,0,255))
-		screen.blit(text_surface, cell_rect)#replace rectangle with new white rectangle w number
+		
 		
 
 
 	# @classmethod
 	def draw_number(self):
-		if self.info.has_filled == True:
-			pass
+		# if self.info.has_filled == True:
+		# 	pass
 			
-		else:
-			pass
+		# else:
+		#	pass
+	
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			if event.button == 1: # left click on mouse
-				for cell in cells:
-					if cell.rect.collidepoint(pygame.mouse.get_pos()):
-							left = cell.left
-							top = cell.top
-							width = cell.width
-							height = cell.height
+				# for cell in cells:
+				if cell.rect.collidepoint(pygame.mouse.get_pos()):
+						left = cell.left
+						top = cell.top
+						width = cell.width
+						height = cell.height
 
 
-							# rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width, height))
-							# outline = pygame.draw.rect(screen, (0,0,0), pygame.Rect(left - 1, top - 1, width+2, height+2))
-							# use draw_rectangle for these 
-							
+						# rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width, height))
+						# outline = pygame.draw.rect(screen, (0,0,0), pygame.Rect(left - 1, top - 1, width+2, height+2))
+						# use draw_rectangle for these 
+						
 
-							#create_cell() - need to access the rectangle of this new cell, how? - nvm
-							#we are gonna make change cell also change num?
-							cell.change_cell(num = 0)
+						#create_cell() - need to access the rectangle of this new cell, how? - nvm
+						#we are gonna make change cell also change num?
+						cell.change_cell(num = 1)
 
-							# text_surface = font.render(str(input_num), True, (0,0,255))
-							# screen.blit(text_surface, rect)#replace rectangle with new white rectangle w number
-							
-							cell.has_filled = has_number = True
-							# rect_info = [rect, (left, top, width, height), rectangle[2], has_number]
-							# grid_rectangles.delete[rectangle]
-							# grid_rectangles[rectangle[2]] = rect_info #replace this empty cell with new cell tha thas number
-							print("yep im printing")
+						# text_surface = font.render(str(input_num), True, (0,0,255))
+						# screen.blit(text_surface, rect)#replace rectangle with new white rectangle w number
+						
+						# cell.has_filled = has_number = True
+
+						# rect_info = [rect, (left, top, width, height), rectangle[2], has_number]
+						# grid_rectangles.delete[rectangle]
+						# grid_rectangles[rectangle[2]] = rect_info #replace this empty cell with new cell tha thas number
+						print("yep im printing")
 		#we need an error detection when inputting wrong number
 
 	def mouse_print(self):
@@ -335,6 +346,7 @@ while running:
 			# cell.mouse_print()
 			# print(number_of_cells)
 			cell.highlight()
+			cell.draw_number()
 
 		
 		grid.create_grid_outlines()
