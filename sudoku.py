@@ -69,8 +69,8 @@ def highlight():
 					# highlight_lol = pygame.draw.rect(screen, color, pygame.Rect(rectangle[1]))
 					draw_rectangle(color, rectangle[1][0], rectangle[1][1], rectangle[1][2], rectangle[1][3])
 					hovered = False
-				elif not rectangle[0].collidepoint(pygame.mouse.get_pos()):
-					hovered = False
+				# elif not rectangle[0].collidepoint(pygame.mouse.get_pos()):
+				# 	hovered = False
 
 	
 
