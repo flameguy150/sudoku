@@ -29,7 +29,7 @@ class rect_info:
 		self.width = width
 		self.height = height
 		# self.index = index
-		self.has_filled = False
+		self.filled = False
 		self.rect = 0 #the actual pygame rectangle
 	
 
@@ -45,17 +45,18 @@ class Cell:
 		self.width = width
 		self.height = height
 		# self.index = index
-		self.has_filled = False
+		self.filled = False
+		self.is_red = False
 		self.rect = 0
 
-	@staticmethod
-	def create_cell(screen, color, left, top, width, height):
+	# @staticmethod
+	def create_cell(self, screen, color, left, top, width, height):
 		global number_of_cells
 		cell_outline = pygame.draw.rect(screen, (0,0,0), pygame.Rect(left - 1, top - 1, width + 2, height + 2))
 		cell_rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width, height))
-		cell = Cell(left, top, width, height)
-		cell.rect = cell_rect
-		cells.append(cell)
+		# cell = Cell(left, top, width, height)
+		self.rect = cell_rect
+		cells.append(self)
 		# self.info.rect = cell
 		number_of_cells += 1
 	
@@ -65,38 +66,47 @@ class Cell:
 		# create new cell in red
 		#cell.change_cell()
 		# color = (255,0,0)
-		if color == None:
-			color = (255,255,255)
 
-		left = self.left #+ 1
-		top = self.top 
-		width = self.width 
-		height = self.height 
-		
-		index = cells.index(self)
-
-		number_of_cells -= 1
-		# self.create_cell(screen, color, left, top, width, height) #also known as the jiggly effect
-
-		#create cell lol
-		cell_outline = pygame.draw.rect(screen, (0,0,0), pygame.Rect(left - 1, top - 1, width + 2, height + 2))
-		cell_rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width, height))
-		cell = Cell(left, top, width, height)
-		cell.rect = cell_rect
-		# cells.append(cell) #TIME TO REPLACE
-		
-		
-		if num == None:
-			# don't font.render
+		#if cell.filled, do not change cell like AT ALL
+		if self.filled:
 			pass
 		else:
-			text_surface = font.render(str(num), True, (0,0,255))
-			screen.blit(text_surface, cell_rect)#replace rectangle with new white rectangle w number
+			if color == None:
+				color = (255,255,255)
 
-		# print(index)
-		cells[index] = cell
-		# self.info.rect = cell
-		number_of_cells += 1
+			left = self.left 
+			top = self.top 
+			width = self.width 
+			height = self.height 
+			
+			index = cells.index(self)
+
+			number_of_cells -= 1
+			# self.create_cell(screen, color, left, top, width, height) #also known as the jiggly effect
+
+			#create cell lol
+			cell = Cell(left, top, width, height)
+			cell_outline = pygame.draw.rect(screen, (0,0,0), pygame.Rect(left - 1, top - 1, width + 1, height + 1))
+			cell_rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width - 1, height - 1))
+			
+			cell.rect = cell_rect
+			# cell.rect.y = 10
+			# cell.rect.right += 10
+
+			# cells.append(cell) #TIME TO REPLACE
+			
+			
+			if num == None:
+				# don't font.render
+				pass
+			else:
+				text_surface = font.render(str(num), True, (0,0,255))
+				screen.blit(text_surface, cell.rect)#replace rectangle with new white rectangle w number
+				cell.filled = True
+			# print(index)
+			cells[index] = cell
+			# self.info.rect = cell
+			number_of_cells += 1
 
 		
 		
@@ -104,41 +114,27 @@ class Cell:
 
 	# @classmethod
 	def draw_number(self):
-		# if self.info.has_filled == True:
-		# 	pass
-			
-		# else:
-		#	pass
-	
-		if event.type == pygame.MOUSEBUTTONDOWN:
-			if event.button == 1: # left click on mouse
-				# for cell in cells:
-				if cell.rect.collidepoint(pygame.mouse.get_pos()):
-						left = cell.left
-						top = cell.top
-						width = cell.width
-						height = cell.height
+		if self.filled == True:
+			pass # dont draw number
+		else: 
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				if event.button == 1: # left click on mouse
+					# for cell in cells:
+					if self.rect.collidepoint(pygame.mouse.get_pos()):
+							# left = self.left
+							# top = self.top
+							# width = self.width
+							# height = self.height
 
+							self.change_cell(num=1) # after i change cell, the cell changes, so is self.filled being called on old cell or new cell?
+							
+							# text_surface = font.render(str(input_num), True, (0,0,255))
+							# screen.blit(text_surface, rect)#replace rectangle with new white rectangle w number
+							
+							# cell.has_filled = has_number = True
 
-						# rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width, height))
-						# outline = pygame.draw.rect(screen, (0,0,0), pygame.Rect(left - 1, top - 1, width+2, height+2))
-						# use draw_rectangle for these 
-						
-
-						#create_cell() - need to access the rectangle of this new cell, how? - nvm
-						#we are gonna make change cell also change num?
-						cell.change_cell(num = 1)
-
-						# text_surface = font.render(str(input_num), True, (0,0,255))
-						# screen.blit(text_surface, rect)#replace rectangle with new white rectangle w number
-						
-						# cell.has_filled = has_number = True
-
-						# rect_info = [rect, (left, top, width, height), rectangle[2], has_number]
-						# grid_rectangles.delete[rectangle]
-						# grid_rectangles[rectangle[2]] = rect_info #replace this empty cell with new cell tha thas number
-						print("yep im printing")
-		#we need an error detection when inputting wrong number
+							print("yep im printing")
+			#we need an error detection when inputting wrong number
 
 	def mouse_print(self):
 		if event.type == pygame.MOUSEBUTTONDOWN:
@@ -149,40 +145,7 @@ class Cell:
 			elif event.button == 3:
 				print("Right mouse button clicked at:", event.pos)
 	
-
-	#Ig this function needs to be outside of the class bc i cant use it within another function in the same class
-	# def draw_cell(self, screen, color, left, top, width, height):
-	# 	cell_outline = pygame.draw.rect(screen, (0,0,0), pygame.rect(left, top, width, height))
-	# 	cell = pygame.draw.rect(screen, color, pygame.rect(left, top, width, height))
-	# 	cells.append(cell)
-
-	# def highlight(self):
-	# 	if self.info.has_filled == False:
-	# 		# do some highlighting
-	# 		pass
-	# 	else:
-	# 		pass
-
-	# 	global hovered
-
-	# 	for cell in cells:
-	# 		if event.type == pygame.MOUSEMOTION:
-	# 				if self.collidepoint(pygame.mouse.get_pos()) and not hovered:
-	# 					left = cell.left
-	# 					top = cell.top
-	# 					width = cell.width
-	# 					height = height
-
-						
-	# 					outline = Cell.create_cell(screen, (0,0,0), left - 1, top - 1, width + 2, height + 2)
-	# 					highlight_lol = pygame.draw.rect(screen, (255, 40, 0), pygame.Rect())
-	# 					hovered = True
-	# 				elif not self.collidepoint(pygame.mouse.get_pos()): # draw white rectangle to replace red when cursor not over rectangle
-	# 					# highlight_lol = pygame.draw.rect(screen, color, pygame.Rect(rectangle[1]))
-	# 					Cell.create_cell(screen, (255,0,0), self.left, self.top, self.width, self.height)
-	# 					hovered = False
-	# 				elif not self.collidepoint(pygame.mouse.get_pos()):
-	# 					hovered = False
+	
 	def highlight(self):
 		global hovered
 
@@ -193,30 +156,24 @@ class Cell:
 			# else:
 			# 	pass
 
-		left = self.left
-		top = self.top
-		width = self.width
-		height = self.height
+			#if self.filled and hovered, dont change the cell
+			#if self.filled and not hovered, DONT CHANGE THE CELL
+			#if not self.filled and hovered, change to red
+			#if not self.filled and not hovered, change to white
 
 		if event.type == pygame.MOUSEMOTION:
-				
-				if self.rect.collidepoint(pygame.mouse.get_pos()) and not hovered:
-					left = self.left
-					top = self.top
-					width = self.width
-					height = self.height
-
+				if self.rect.collidepoint(pygame.mouse.get_pos()):
+					if self.filled:
+						pass #DONT HIGHLIGHT
+					else:
+						self.change_cell(color = (255,0,0))# changes the cell to red
+						hovered = True
 					#issue, cell.create_cell is adding onto the number of cells in the cell list
 					#instead of creating a new red cell, i should just change the color of the original cell into red when its hovered
 
-
-
-
-
 					# outline = Cell.create_cell(screen, (0,0,0), left - 1, top - 1, width + 2, height + 2)
 					# highlight_lol = Cell.create_cell(screen, (255, 40, 0), left, top, width, height)
-					self.change_cell(color = (255,0,0))# changes the cell to red
-					hovered = True
+
 				elif not self.rect.collidepoint(pygame.mouse.get_pos()): # draw white rectangle to replace red when cursor not over rectangle
 					# highlight_lol = pygame.draw.rect(screen, color, pygame.Rect(rectangle[1]))
 					color = (255, 255, 255)
@@ -278,7 +235,7 @@ class Grid:
 
 	def draw_3x3(self):
 		# self.x2 = x
-		# self.y2 = y
+		# self.y2 = 
 		for i in range (3):
 			for j in range (3):
 				left_factor = 80*j + (self.x*240)
@@ -289,16 +246,8 @@ class Grid:
 				width = 80
 				height = 80
 				cell = Cell(left, top, width, height)
-				cell.create_cell(screen, color, left, top, width, height)
+				cell.create_cell(screen, color, cell.left, cell.top, cell.width, cell.height)
 				# cells.append(cell.info)
-	def mouse_print(self):
-		if event.type == pygame.MOUSEBUTTONDOWN:
-			if event.button == 1:
-				print("Left mouse button clicked at:", event.pos)
-				# print(grid_rectangles[0][0]) #cell.rect
-				# print(grid_rectangles[0][1]) #cell.left, cell.top, cell.width, cell.height
-			elif event.button == 3:
-				print("Right mouse button clicked at:", event.pos)
 	
 	
 
@@ -345,8 +294,8 @@ while running:
 		for cell in cells:
 			# cell.mouse_print()
 			# print(number_of_cells)
-			cell.highlight()
 			cell.draw_number()
+			cell.highlight()
 
 		
 		grid.create_grid_outlines()
