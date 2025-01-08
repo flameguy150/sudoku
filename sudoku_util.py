@@ -72,7 +72,9 @@ class Cell:
 		cell_rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width, height))
 		# cell = Cell(left, top, width, height)
 		self.rect = cell_rect
+
 		cells.append(self)
+		
 		# self.info.rect = cell
 		number_of_cells += 1
 	
@@ -94,6 +96,7 @@ class Cell:
 			top = self.top 
 			width = self.width 
 			height = self.height 
+			correct_num = self.correct_number
 			
 			index = cells.index(self)
 
@@ -106,6 +109,7 @@ class Cell:
 			cell_rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width - 1, height - 1))
 			
 			cell.rect = cell_rect
+			cell.correct_number = correct_num
 			# cell.rect.y = 10
 			# cell.rect.right += 10
 
@@ -116,14 +120,17 @@ class Cell:
 				# don't font.render
 				pass
 			else:
-				text_surface = font.render(str(num), True, (0,0,255))
-				cell.rect.left += 31
-				cell.rect.top += 29
-				screen.blit(text_surface, cell.rect)#replace rectangle with new white rectangle w number
-				# cell.rect.left -= 2
-				# cell.rect.top -= 2
-				cell.filled = True
-				cell.number = num
+				if num != cell.correct_number:
+					print("wrong number inputted")
+				else:
+					text_surface = font.render(str(num), True, (0,0,255))
+					cell.rect.left += 31
+					cell.rect.top += 29
+					screen.blit(text_surface, cell.rect)#replace rectangle with new white rectangle w number
+					# cell.rect.left -= 2
+					# cell.rect.top -= 2
+					cell.filled = True
+					cell.number = num
 			# print(index)
 			cells[index] = cell
 			# self.info.rect = cell
@@ -330,16 +337,7 @@ class Grid:
 
 		
 # list out of range bc cells has not been appended yet
-# cell_grid = [[cells[0] ,cells[1], cells[2], cells[27], cells[28], cells[29], cells[54], cells[55], cells[56]],
-# 			 [cells[3], cells[4], cells[5], cells[30] ,cells[31], cells[32], cells[57], cells[58], cells[59]],
-# 			 [cells[6], cells[7], cells[8], cells[33], cells[34], cells[35], cells[60], cells[61], cells[62]],
-# 			 [cells[9], cells[10], cells[11], cells[36], cells[37], cells[38], cells[63 ], cells[64], cells[65]],
-# 			 [cells[12],cells[13], cells[14], cells[39], cells[40], cells[41], cells[66], cells[67], cells[68]],
-# 			 [cells[15],cells[16], cells[17], cells[42], cells[43], cells[44], cells[69], cells[70], cells[71]],
-# 			 [cells[18],cells[19], cells[20], cells[45], cells[46], cells[47], cells[72], cells[73], cells[74]],
-# 			 [cells[21],cells[22], cells[23], cells[48], cells[49], cells[50], cells[75], cells[76], cells[77]],
-# 			 [cells[24],cells[25], cells[26], cells[51], cells[52], cells[53], cells[78], cells[79], cells[80]]
-# 			 ]
+
 				
 				
 #sudoku board?
@@ -365,9 +363,6 @@ easygrid1_solution = [[8, 7, 5, 9, 2, 1, 3, 4, 6],
 		[4, 3, 2, 5, 8, 6, 9, 7, 1]
 		]
 
-# for i in range (9): # go through every list, and sht
-# 	for j in range(9):
-# 		cell_grid[i][j].number = easygrid1_[i][j].number
 
 #to generate a board, i just make it so that [1-9], randomly sort them out, if list[0][0] == list[1][0], that is NOT AUTHORIZED, so recreate list
 
@@ -393,6 +388,22 @@ running = True
 
 grid = Grid(screen)
 grid.draw_grid()
+
+
+cell_grid = [[cells[0] ,cells[1], cells[2], cells[27], cells[28], cells[29], cells[54], cells[55], cells[56]],
+			 [cells[3], cells[4], cells[5], cells[30] ,cells[31], cells[32], cells[57], cells[58], cells[59]],
+			 [cells[6], cells[7], cells[8], cells[33], cells[34], cells[35], cells[60], cells[61], cells[62]],
+			 [cells[9], cells[10], cells[11], cells[36], cells[37], cells[38], cells[63 ], cells[64], cells[65]],
+			 [cells[12],cells[13], cells[14], cells[39], cells[40], cells[41], cells[66], cells[67], cells[68]],
+			 [cells[15],cells[16], cells[17], cells[42], cells[43], cells[44], cells[69], cells[70], cells[71]],
+			 [cells[18],cells[19], cells[20], cells[45], cells[46], cells[47], cells[72], cells[73], cells[74]],
+			 [cells[21],cells[22], cells[23], cells[48], cells[49], cells[50], cells[75], cells[76], cells[77]],
+			 [cells[24],cells[25], cells[26], cells[51], cells[52], cells[53], cells[78], cells[79], cells[80]]
+			 ]
+
+for i in range (9): # go through every list, and sht
+	for j in range(9):
+		cell_grid[i][j].correct_number = easygrid1_[i][j]
 
 cellular = Cell(80, 80, 80, 80)
 grid.print_input_num(input_num)
