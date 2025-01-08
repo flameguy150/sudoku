@@ -117,7 +117,6 @@ class Cell:
 			
 			
 			if num == None:
-				# don't font.render
 				pass
 			else:
 				if num != cell.correct_number:
@@ -130,17 +129,13 @@ class Cell:
 					# cell.rect.left -= 2
 					# cell.rect.top -= 2
 					cell.filled = True
-					cell.number = num
+					
 			# print(index)
 			cells[index] = cell
 			# self.info.rect = cell
 			number_of_cells += 1
 
 		
-		
-
-
-	# @classmethod
 	def draw_number(self):
 		global input_num
 		if self.filled == True:
@@ -165,15 +160,6 @@ class Cell:
 							# print("yep im printing") #debugging tool YA FEEL ME
 			#we need an error detection when inputting wrong number
 
-	def mouse_print(self):
-		if event.type == pygame.MOUSEBUTTONDOWN:
-			if event.button == 1:
-				print("Left mouse button clicked at:", event.pos)
-				# print(grid_rectangles[0][0]) #cell.rect
-				# print(grid_rectangles[0][1]) #cell.left, cell.top, cell.width, cell.height
-			elif event.button == 3:
-				print("Right mouse button clicked at:", event.pos)
-	
 	
 	def highlight(self):
 		global hovered
@@ -335,7 +321,14 @@ class Grid:
 		pass
 
 
-		
+	def generate_board(self, grid_): # generate grid (like easygrid1) wo solutions on board
+		for i in range(9):
+			for j in range(9):
+				cell_grid[i][j].number = grid_[i][j]
+		for cell in cells:
+			if cell.number != 0:
+				cell.change_cell(num = cell.number)
+
 # list out of range bc cells has not been appended yet
 
 				
@@ -403,10 +396,12 @@ cell_grid = [[cells[0] ,cells[1], cells[2], cells[27], cells[28], cells[29], cel
 
 for i in range (9): # go through every list, and sht
 	for j in range(9):
-		cell_grid[i][j].correct_number = easygrid1_[i][j]
+		cell_grid[i][j].correct_number = easygrid1_solution[i][j]
 
 cellular = Cell(80, 80, 80, 80)
 grid.print_input_num(input_num)
+
+grid.generate_board(easygrid1_)
 # game loop 
 while running: 
 	
@@ -450,7 +445,7 @@ while running:
 			# print(number_of_cells)
 			cell.draw_number()
 			cell.highlight()
-			cell.return_number() # yay its storing
+			# cell.return_number() # yay its storing
 
 		
 		grid.create_grid_outlines()
@@ -463,6 +458,7 @@ while running:
 		make sure in change_cell func that cell.number is changed
 		add controls to change number that is held by user when they try to draw
 
+		need to add lives so that players can only make 3 mistakes? different game modes	
 
 
 		"""
