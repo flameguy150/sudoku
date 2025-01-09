@@ -1,13 +1,24 @@
-# rect_info = [attribute1, a2, a3, ..., a4]
-
 import pygame
 from pygame import mixer
+import random
+from sudoku_boards import easygrid1_, easygrid1_solution
+
+# comp_width = winfo_screenwidth()
+# comp_height = winfo_screenheight()
+
+# screen = pygame.display.set_mode() 
+# display_size = pygame.display.get_desktop_sizes()
+# print(display_size)
+# screen = pygame.display.set_mode(display_size[0]) 
+screen = pygame.display.set_mode((1000,800))
 
 
-screen = pygame.display.set_mode((800, 800)) 
 pygame.display.set_caption('sudoku_util') 
 background_colour = (234, 212, 252) 
 screen.fill(background_colour) 
+
+lives = 5
+
 
 cells = []
 
@@ -30,7 +41,7 @@ mixer.music.play(-1, 0.0)
 number_of_cells = 0 #keeping track if all 81 cells are in the cells list
 
 input_num = 1 #the number that the player holds, so when they left click, that number will be drawn on cell
-#i will put controls down to switch number 1-9
+
 
 pygame.font.init()
 font = pygame.font.Font(None,36)
@@ -47,9 +58,6 @@ class rect_info:
 		self.rect = 0 #the actual pygame rectangle
 	
 
-#we need to append an actual Cell into cells so we can access highlight function
-#
-
 class Cell:
 	def __init__(self, left, top, width, height):
 		# self.info = rect_info(left, top, width, height)
@@ -65,27 +73,21 @@ class Cell:
 		self.number = 0 # the number drawn on cell
 		self.correct_number = 0 #?might need it?
 
-	# @staticmethod
 	def create_cell(self, screen, color, left, top, width, height):
 		global number_of_cells
 		cell_outline = pygame.draw.rect(screen, (0,0,0), pygame.Rect(left - 1, top - 1, width + 2, height + 2))
 		cell_rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width, height))
-		# cell = Cell(left, top, width, height)
+	
 		self.rect = cell_rect
 
 		cells.append(self)
 		
-		# self.info.rect = cell
 		number_of_cells += 1
 	
 	def change_cell(self, color = None, num = None): #change_cell(self, num), #change_cell
 		global number_of_cells
-		# delete cell
-		# create new cell in red
-		#cell.change_cell()
-		# color = (255,0,0)
+		global lives
 
-		#if cell.filled, do not change cell like AT ALL
 		if self.filled:
 			pass
 		else:
@@ -103,7 +105,7 @@ class Cell:
 			number_of_cells -= 1
 			# self.create_cell(screen, color, left, top, width, height) #also known as the jiggly effect
 
-			#create cell lol
+			
 			cell = Cell(left, top, width, height)
 			cell_outline = pygame.draw.rect(screen, (0,0,0), pygame.Rect(left - 1, top - 1, width + 1, height + 1))
 			cell_rect = pygame.draw.rect(screen, color, pygame.Rect(left, top, width - 1, height - 1))
@@ -121,6 +123,7 @@ class Cell:
 			else:
 				if num != cell.correct_number:
 					print("wrong number inputted")
+					lives -= 1
 				else:
 					text_surface = font.render(str(num), True, (0,0,255))
 					cell.rect.left += 31
@@ -129,6 +132,7 @@ class Cell:
 					# cell.rect.left -= 2
 					# cell.rect.top -= 2
 					cell.filled = True
+					cell.number = cell.correct_number
 					
 			# print(index)
 			cells[index] = cell
@@ -163,16 +167,6 @@ class Cell:
 	
 	def highlight(self):
 		global hovered
-
-		# for cell in cells:
-			# if cell.info.has_filled == False:
-			# # do some highlighting
-			# 	pass
-			# else:
-			# 	pass
-
-			#self.filled, maybe highlight it a different, lighter color like blue or something
-
 		if event.type == pygame.MOUSEMOTION:
 				if self.rect.collidepoint(pygame.mouse.get_pos()):
 					if self.filled:
@@ -180,23 +174,15 @@ class Cell:
 					else:
 						self.change_cell(color = (255,0,0))# changes the cell to red
 						hovered = True
-					#issue, cell.create_cell is adding onto the number of cells in the cell list
-					#instead of creating a new red cell, i should just change the color of the original cell into red when its hovered
-
-					# outline = Cell.create_cell(screen, (0,0,0), left - 1, top - 1, width + 2, height + 2)
-					# highlight_lol = Cell.create_cell(screen, (255, 40, 0), left, top, width, height)
 
 				elif not self.rect.collidepoint(pygame.mouse.get_pos()): # draw white rectangle to replace red when cursor not over rectangle
 					# highlight_lol = pygame.draw.rect(screen, color, pygame.Rect(rectangle[1]))
 					color = (255, 255, 255)
 					self.change_cell(color = color)
 					hovered = False
-				# elif not self.rect.collidepoint(pygame.mouse.get_pos()):
-				# 	hovered = False
 
 	def return_number(self): # lets see if the numbers are actually stored in the cell
 		pass
-		#for cell in cells:
 		if event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
 					if self.rect.collidepoint(pygame.mouse.get_pos()):
@@ -207,15 +193,11 @@ class Cell:
 
 class Grid:
 	def __init__(self, screen):
-		# self.width_factor = width_factor
-		# self.height_factor = height_factor
-		self.screen_width = screen.get_width()
-		self.screen_height = screen.get_height()
+		self.screen_width = 800#screen.get_width()
+		self.screen_height = 800#screen.get_height()
 
-		self.xline = 0
-		self.yline = 0
-
-		self.x3 = 0
+		# self.display_width = display_size[0][0]
+		# self.display_height = display_size[0][1]
 
 		self.x = 0
 		self.y = 0
@@ -329,50 +311,45 @@ class Grid:
 			if cell.number != 0:
 				cell.change_cell(num = cell.number)
 
-# list out of range bc cells has not been appended yet
+	def check_solution(self):
+		correct = 0
+		for cell in cells:
+			if cell.number == cell.correct_number:
+				correct += 1
+		if correct == 81:
+			print("You won! Congratulations!")
+	
+	def controls(self, event):
+		global input_num
+		global running
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_ESCAPE: #ESCAPE = QUIT BUTTON
+				running = False
+			elif event.key == pygame.K_1:
+				input_num = 1
+			elif event.key == pygame.K_2:
+				input_num = 2
+			elif event.key == pygame.K_3:
+				input_num = 3
+			elif event.key == pygame.K_4:
+				input_num = 4
+			elif event.key == pygame.K_5:
+				input_num = 5
+			elif event.key == pygame.K_6:
+				input_num = 6
+			elif event.key == pygame.K_7:
+				input_num = 7
+			elif event.key == pygame.K_8:
+				input_num = 8
+			elif event.key == pygame.K_9:
+				input_num = 9
+			grid.print_input_num(input_num)
 
-				
-				
-#sudoku board?
-#easy
-easygrid1_ = [[0, 7, 0, 0, 2, 0, 0, 4, 6],
-			  [0, 6, 0, 0 ,0 ,0, 8, 9, 0],
-			  [2, 0, 0, 8, 0 ,0 ,7, 1, 5],
-			  [0, 8, 4, 0, 9, 7, 0, 0, 0],
-			  [7, 1, 0, 0, 0, 0, 0, 5, 9],
-			  [0, 0, 0, 1, 3, 0, 4, 8, 0],
-			  [6, 9, 7, 0, 0, 2, 0, 0, 8],
-			  [0, 5, 8, 0, 0, 0, 0, 6, 0],
-			  [4, 3, 0, 0, 8, 0, 0, 7, 0]
-			  ]
-easygrid1_solution = [[8, 7, 5, 9, 2, 1, 3, 4, 6],
-		[3, 6, 1, 7, 5, 4, 8, 9, 2], 
-		[2, 4, 9, 8, 6, 3, 7, 1, 5], 
-		[5, 8, 4, 6, 9, 7, 1, 2, 3],
-		[7, 1, 3, 2, 4, 8, 6, 5, 9],
-		[9, 2, 6, 1, 3, 5, 4, 8, 7],
-		[6 ,9, 7, 4, 1, 2, 5, 3, 8],
-		[1, 5, 8, 3, 7, 9, 2, 6, 4],
-		[4, 3, 2, 5, 8, 6, 9, 7, 1]
-		]
-
+	def create_button(self):
+		pass
 
 #to generate a board, i just make it so that [1-9], randomly sort them out, if list[0][0] == list[1][0], that is NOT AUTHORIZED, so recreate list
 
-
-
-
-
-
-# rect1 = rect_info(100, 100, False)
-# rect2 = rect_info(200, 200, True)
-
-# rect_info[3] = True   # They don't understand
-
-# rect2.has_filled = True
-
-# if (__name__ == "__main__"):
-	
 # Update the display using flip 
 pygame.display.flip() 
 
@@ -402,6 +379,7 @@ cellular = Cell(80, 80, 80, 80)
 grid.print_input_num(input_num)
 
 grid.generate_board(easygrid1_)
+
 # game loop 
 while running: 
 	
@@ -409,63 +387,31 @@ while running:
 	for event in pygame.event.get(): 
 
 		""" CONTROLS"""
-
-		if event.type == pygame.KEYUP:
-			if event.key == pygame.K_ESCAPE: #ESCAPE = QUIT BUTTON
-				running = False
-			elif event.key == pygame.K_1:
-				input_num = 1
-			elif event.key == pygame.K_2:
-				input_num = 2
-			elif event.key == pygame.K_3:
-				input_num = 3
-			elif event.key == pygame.K_4:
-				input_num = 4
-			elif event.key == pygame.K_5:
-				input_num = 5
-			elif event.key == pygame.K_6:
-				input_num = 6
-			elif event.key == pygame.K_7:
-				input_num = 7
-			elif event.key == pygame.K_8:
-				input_num = 8
-			elif event.key == pygame.K_9:
-				input_num = 9
-			grid.print_input_num(input_num)
-
+		grid.controls(event)
+	
 		""" CONTROLS"""
 
 		# Check for QUIT event	(need this so that file can also be exited by pressing the red x on top right)
 		if event.type == pygame.QUIT: 
 			running = False
-
 	
 		for cell in cells:
-			# cell.mouse_print()
-			# print(number_of_cells)
 			cell.draw_number()
 			cell.highlight()
-			# cell.return_number() # yay its storing
 
-		
+		grid.check_solution()
 		grid.create_grid_outlines()
-		# for cell in cells:
-		# 	cell.highlight()
-		# if event.type == pygame.KEYDOWN:
-		# 	grid.print_input_num(input_num) #maybe create a delete function to call before print?
+		
 		"""
 		add cell.number to contain and access the number for each cell
 		make sure in change_cell func that cell.number is changed
 		add controls to change number that is held by user when they try to draw
 
-		need to add lives so that players can only make 3 mistakes? different game modes	
-
-
+		need to add lives so that players can only make 3 mistakes? different game modes
+		- when lives == 0, pop up a message saying game over and restart
+		add victory screen
+		menu screen (to choose which difficulty)
 		"""
-		
-
-		# numbers()
-
 		pygame.display.flip() 
 		
 pygame.quit()
