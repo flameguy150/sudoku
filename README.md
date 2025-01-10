@@ -1,4 +1,4 @@
 # Sudoku
 Made with pygame
 
-![image](https://github.com/user-attachments/assets/16865e47-a9f9-4797-b506-cf587910fd63)
+![image](https://github.com/user-attachments/assets/ad8d161f-b7e8-498e-beb1-d84dd691c90d)
