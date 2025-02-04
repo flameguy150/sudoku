@@ -1,7 +1,10 @@
 import pygame
 from pygame import mixer
 import random
-from sudoku_boards import easygrid1_, easygrid1_solution
+from sudoku_boards import easygrid1_, easygrid1_solution, is_valid, _board
+import os
+import sys
+
 
 # comp_width = winfo_screenwidth()
 # comp_height = winfo_screenheight()
@@ -26,16 +29,11 @@ input_num_print_list = [] #to delete off screen everytime input_num changes
 
 hovered = False
 
-# Starting the mixer 
+song = os.path.join("sounds", "RLbeat2.mp3")
+
 mixer.init() 
-  
-# Loading the song 
-mixer.music.load("RLbeat2.mp3") 
-  
-# Setting the volume 
+mixer.music.load(song) 
 mixer.music.set_volume(0.7) 
-  
-# Start playing the song 
 mixer.music.play(-1, 0.0) 
 
 number_of_cells = 0 #keeping track if all 81 cells are in the cells list
@@ -251,6 +249,32 @@ class Grid:
 	"""
 		OTHER FUNCTIONS OF THE GAME
 	"""
+	def controls(self, event):
+		global input_num
+		global running
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_ESCAPE: #ESCAPE = QUIT BUTTON
+				running = False
+			elif event.key == pygame.K_1:
+				input_num = 1
+			elif event.key == pygame.K_2:
+				input_num = 2
+			elif event.key == pygame.K_3:
+				input_num = 3
+			elif event.key == pygame.K_4:
+				input_num = 4
+			elif event.key == pygame.K_5:
+				input_num = 5
+			elif event.key == pygame.K_6:
+				input_num = 6
+			elif event.key == pygame.K_7:
+				input_num = 7
+			elif event.key == pygame.K_8:
+				input_num = 8
+			elif event.key == pygame.K_9:
+				input_num = 9
+			grid.print_input_num(input_num)
+			
 	def print_input_num(self, num): # make it so it deletes the previous input num and shows new one after changing number held
 		# if num == 0:
 		# 	white_ = font.render("", True, (0,0,255))
@@ -318,35 +342,14 @@ class Grid:
 				correct += 1
 		if correct == 81:
 			print("You won! Congratulations!")
-	
-	def controls(self, event):
-		global input_num
-		global running
-		if event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_ESCAPE: #ESCAPE = QUIT BUTTON
-				running = False
-			elif event.key == pygame.K_1:
-				input_num = 1
-			elif event.key == pygame.K_2:
-				input_num = 2
-			elif event.key == pygame.K_3:
-				input_num = 3
-			elif event.key == pygame.K_4:
-				input_num = 4
-			elif event.key == pygame.K_5:
-				input_num = 5
-			elif event.key == pygame.K_6:
-				input_num = 6
-			elif event.key == pygame.K_7:
-				input_num = 7
-			elif event.key == pygame.K_8:
-				input_num = 8
-			elif event.key == pygame.K_9:
-				input_num = 9
-			grid.print_input_num(input_num)
 
 	def create_button(self):
 		pass
+	
+	def _createsolution(self, board):
+		for i in range (9): # go through every list, and sht
+			for j in range(9):
+				cell_grid[i][j].correct_number = board[i][j]
 
 #to generate a board, i just make it so that [1-9], randomly sort them out, if list[0][0] == list[1][0], that is NOT AUTHORIZED, so recreate list
 
@@ -371,18 +374,20 @@ cell_grid = [[cells[0] ,cells[1], cells[2], cells[27], cells[28], cells[29], cel
 			 [cells[24],cells[25], cells[26], cells[51], cells[52], cells[53], cells[78], cells[79], cells[80]]
 			 ]
 
-for i in range (9): # go through every list, and sht
-	for j in range(9):
-		cell_grid[i][j].correct_number = easygrid1_solution[i][j]
+# def _createsolution()
+# for i in range (9): # go through every list, and sht
+# 	for j in range(9):
+# 		cell_grid[i][j].correct_number = easygrid1_solution[i][j]
 
-cellular = Cell(80, 80, 80, 80)
+grid2 = _board()
+
+grid._createsolution(grid2)
+grid.generate_board(grid2) #this should create a whole board with solutions
+
 grid.print_input_num(input_num)
-
-grid.generate_board(easygrid1_)
 
 # game loop 
 while running: 
-	
 # for loop through the event queue 
 	for event in pygame.event.get(): 
 
@@ -399,7 +404,7 @@ while running:
 			cell.draw_number()
 			cell.highlight()
 
-		grid.check_solution()
+		# grid.check_solution()
 		grid.create_grid_outlines()
 		
 		"""
