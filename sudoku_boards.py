@@ -109,12 +109,6 @@ def create_puzzle():
 def _board():
     board = [[0] * 9 for _ in range(9)]
 
-    #generate some random numbers on the board first so the puzzle is different every time
-    # for x in range(9):
-    #     y = random.randint(0,8) #column indexes
-    #     num = random.randint(0,9)
-    #     board[x][y] = num
-
     board[0][0] = random.randint(0,9) #so the puzzle is different every time
 
     solution(board)
@@ -133,6 +127,10 @@ def printboard(board):
                 c = ((xx) + x)
                 string += str(board[row][c]) + " "
     print(string)
+
+
+
+
 
 
 

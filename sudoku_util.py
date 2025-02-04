@@ -110,10 +110,7 @@ class Cell:
 			
 			cell.rect = cell_rect
 			cell.correct_number = correct_num
-			# cell.rect.y = 10
-			# cell.rect.right += 10
-
-			# cells.append(cell) #TIME TO REPLACE
+			
 			
 			
 			if num == None:
@@ -127,8 +124,6 @@ class Cell:
 					cell.rect.left += 31
 					cell.rect.top += 29
 					screen.blit(text_surface, cell.rect)#replace rectangle with new white rectangle w number
-					# cell.rect.left -= 2
-					# cell.rect.top -= 2
 					cell.filled = True
 					cell.number = cell.correct_number
 					
@@ -147,21 +142,9 @@ class Cell:
 				if event.button == 1: # left click on mouse
 					# for cell in cells:
 					if self.rect.collidepoint(pygame.mouse.get_pos()):
-							# left = self.left
-							# top = self.top
-							# width = self.width
-							# height = self.height
 
 							self.change_cell(num = input_num) # after i change cell, the cell changes, so is self.filled being called on old cell or new cell?
 							
-							# text_surface = font.render(str(input_num), True, (0,0,255))
-							# screen.blit(text_surface, rect)#replace rectangle with new white rectangle w number
-							
-							# cell.has_filled = has_number = True
-
-							# print("yep im printing") #debugging tool YA FEEL ME
-			#we need an error detection when inputting wrong number
-
 	
 	def highlight(self):
 		global hovered
@@ -174,7 +157,6 @@ class Cell:
 						hovered = True
 
 				elif not self.rect.collidepoint(pygame.mouse.get_pos()): # draw white rectangle to replace red when cursor not over rectangle
-					# highlight_lol = pygame.draw.rect(screen, color, pygame.Rect(rectangle[1]))
 					color = (255, 255, 255)
 					self.change_cell(color = color)
 					hovered = False
@@ -193,9 +175,7 @@ class Grid:
 	def __init__(self, screen):
 		self.screen_width = 800#screen.get_width()
 		self.screen_height = 800#screen.get_height()
-
-		# self.display_width = display_size[0][0]
-		# self.display_height = display_size[0][1]
+	
 
 		self.x = 0
 		self.y = 0
@@ -218,11 +198,6 @@ class Grid:
 				self.x = x
 				self.y = y
 				self.draw_3x3()
-		#grid outlines
-		# for i in range(4): #vertical lines
-		# 	self.xline = self.draw_line((0,0,0), 40 + 240*i, 40, 40 + 240*i, 760, 5)
-		# for x in range(4): #horizontal lines
-		# 	self.yline = self.draw_line((0,0,0), 40, 40 + 240*x, 760, 40+ 240*x, 5)
 
 	def draw_3x3(self):
 		# self.x2 = x
@@ -276,15 +251,6 @@ class Grid:
 			grid.print_input_num(input_num)
 			
 	def print_input_num(self, num): # make it so it deletes the previous input num and shows new one after changing number held
-		# if num == 0:
-		# 	white_ = font.render("", True, (0,0,255))
-		# 	white_rect = (2, 2, 25, 25)
-		# 	screen.blit(white_, white_rect)
-		# else:
-		# 	msg = "Currently inputing number " + str(num)
-		# 	rect = (2, 2, 25, 25)
-		# 	text_surface = font.render(msg, True, (0,0,255))
-		# 	screen.blit(text_surface, rect)#replace rectangle with new white rectangle w number
 		if len(input_num_print_list) == 0:
 			msg = "Currently inputing number " + str(num)
 			rect = pygame.draw.rect(screen, background_colour, pygame.Rect(2,2,350,25))
