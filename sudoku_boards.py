@@ -83,11 +83,13 @@ def is_valid(board, row, column, num): #boolean function that returns true if is
 
 
 def solution(board): #recursive backtracking algorithm
+    numbers = list(range(1,10)) #list of numbers from 1 - 10
     for row in range(9):
+        random.shuffle(numbers)
         for column in range(9):
             if board[row][column] == 0:
 
-                for num in range(1,10):
+                for num in numbers:
                     if is_valid(board, row, column, num):
                         board[row][column] = num
 
@@ -121,10 +123,10 @@ def printboard(board):
     for row in range(9):
         string += "\n" + "-----------------------\n"
         
-        for x in range(1,4):
+        for x in range(3):
             string+="| "
             for xx in range(3):
-                c = ((xx) + x)
+                c = ((xx) + (x*3))
                 string += str(board[row][c]) + " "
     print(string)
 
