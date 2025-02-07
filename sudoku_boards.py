@@ -121,13 +121,15 @@ def _board():
 def printboard(board):
     string = ""
     for row in range(9):
-        string += "\n" + "-----------------------\n"
+        string += "\n" + "-------------------------\n"
         
         for x in range(3):
             string+="| "
             for xx in range(3):
                 c = ((xx) + (x*3))
                 string += str(board[row][c]) + " "
+                if xx == 2 and x == 2:
+                    string += "|"
     print(string)
 
 

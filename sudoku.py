@@ -345,10 +345,10 @@ cell_grid = [[cells[0] ,cells[1], cells[2], cells[27], cells[28], cells[29], cel
 # 	for j in range(9):
 # 		cell_grid[i][j].correct_number = easygrid1_solution[i][j]
 
-grid2 = _board()
+board = _board()
 
-grid._createsolution(grid2)
-grid.generate_board(grid2) #this should create a whole board with solutions
+grid._createsolution(board)
+grid.generate_board(board) #this should create a whole board with solutions
 
 grid.print_input_num(input_num)
 
@@ -379,7 +379,7 @@ while running:
 		add controls to change number that is held by user when they try to draw
 
 		need to add lives so that players can only make 3 mistakes? different game modes
-		- when lives == 0, pop up a message saying game over and restart
+		- when lives == 0, pop up a message saying  game over and restart
 		add victory screen
 		menu screen (to choose which difficulty)
 		"""
