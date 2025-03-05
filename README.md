@@ -17,8 +17,12 @@ pip install pygame
 ```
 
 3. Run file
+windows:
 ```bash
-windows: py sudoku.py
-mac: python3 sudoku.py
+py sudoku.py
+```
+mac: 
+```bash
+python3 sudoku.py
 ```
 
