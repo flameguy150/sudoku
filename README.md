@@ -17,6 +17,7 @@ pip install pygame
 ```
 
 3. Run file
+   
 windows:
 ```bash
 py sudoku.py
