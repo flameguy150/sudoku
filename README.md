@@ -7,7 +7,7 @@ Made with pygame
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/sudoku.git
+git clone https://github.com/flameguy150/sudoku.git
 cd sudoku
 ```
 
