@@ -1,0 +1,6 @@
+.history/
+venv/
+__pycache__/
+*.pyc
+
+src/neo/__pycache__/

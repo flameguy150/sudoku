@@ -1,7 +1,7 @@
 import pygame
 from pygame import mixer
 import random
-from sudoku_boards import easygrid1_, easygrid1_solution, is_valid, _board
+from alpha.sudoku_boards import easygrid1_, easygrid1_solution, is_valid, _board
 import os
 import sys
 
@@ -29,7 +29,7 @@ input_num_print_list = [] #to delete off screen everytime input_num changes
 
 hovered = False
 
-song = os.path.join("sounds", "RLbeat2.mp3")
+song = os.path.join("../sounds", "RLbeat2.mp3")
 
 mixer.init() 
 mixer.music.load(song) 
@@ -43,6 +43,45 @@ input_num = 1 #the number that the player holds, so when they left click, that n
 
 pygame.font.init()
 font = pygame.font.Font(None,36)
+
+
+
+# def _createsolution()
+# for i in range (9): # go through every list, and sht
+# 	for j in range(9):
+# 		cell_grid[i][j].correct_number = easygrid1_solution[i][j]
+
+def mainloop():
+	cells = []
+	running = True
+	grid = Grid(screen)
+	grid.draw_grid()
+	board = _board()
+	grid._createsolution(easygrid1_solution)
+	grid.generate_board(easygrid1_) #this should create a whole board with solutions
+	grid.print_input_num(input_num)
+	grid = Grid(screen)
+	grid.draw_grid()
+	cell_grid = [[cells[0] ,cells[1], cells[2], cells[27], cells[28], cells[29], cells[54], cells[55], cells[56]],
+			 [cells[3], cells[4], cells[5], cells[30] ,cells[31], cells[32], cells[57], cells[58], cells[59]],
+			 [cells[6], cells[7], cells[8], cells[33], cells[34], cells[35], cells[60], cells[61], cells[62]],
+			 [cells[9], cells[10], cells[11], cells[36], cells[37], cells[38], cells[63 ], cells[64], cells[65]],
+			 [cells[12],cells[13], cells[14], cells[39], cells[40], cells[41], cells[66], cells[67], cells[68]],
+			 [cells[15],cells[16], cells[17], cells[42], cells[43], cells[44], cells[69], cells[70], cells[71]],
+			 [cells[18],cells[19], cells[20], cells[45], cells[46], cells[47], cells[72], cells[73], cells[74]],
+			 [cells[21],cells[22], cells[23], cells[48], cells[49], cells[50], cells[75], cells[76], cells[77]],
+			 [cells[24],cells[25], cells[26], cells[51], cells[52], cells[53], cells[78], cells[79], cells[80]]
+			 ]
+	while running: 
+		for event in pygame.event.get(): 
+			grid.controls(event)
+			if event.type == pygame.QUIT: 
+				running = False
+			for cell in cells:
+				cell.draw_number()
+				cell.highlight()
+			grid.create_grid_outlines()
+			pygame.display.flip()
 
 class rect_info:
 	def __init__(self, Cell, left, top, width, height): #index? we shall see
@@ -347,8 +386,8 @@ cell_grid = [[cells[0] ,cells[1], cells[2], cells[27], cells[28], cells[29], cel
 
 board = _board()
 
-grid._createsolution(board)
-grid.generate_board(board) #this should create a whole board with solutions
+grid._createsolution(easygrid1_solution)
+grid.generate_board(easygrid1_) #this should create a whole board with solutions
 
 grid.print_input_num(input_num)
 

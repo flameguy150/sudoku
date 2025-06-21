@@ -1,7 +1,7 @@
 import pygame
 import sys
-from sudoku import Cell, Grid
-from sudoku_boards import easygrid1_, easygrid1_solution, is_valid, _board
+from alpha.sudoku import Cell, Grid, mainloop
+from alpha.sudoku_boards import easygrid1_, easygrid1_solution, is_valid, _board
 
 
 FPS = 60
@@ -37,27 +37,7 @@ class Level:
         self.gameStateManager = gameStateManager
 
     def run(self):
-        cells = []
-        input_num = 1
-        grid = Grid(self.display)
-        grid.draw_grid()
-        board = _board()
-
-        grid._createsolution(board)
-        grid.generate_board(board) #this should create a whole board with solutions
-
-        grid.print_input_num(input_num)
-        while running: 
-            for event in pygame.event.get():
-                grid.controls(event)
-                if event.type == pygame.QUIT: 
-                    running = False
-
-                for cell in cells:
-                    cell.draw_number()
-                    cell.highlight()
-                grid.create_grid_outlines()
-                pygame.display.flip() 
+        mainloop()
 
 
 class Start:

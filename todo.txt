@@ -1,0 +1,9 @@
+pip install pyinstaller
+pyinstaller --onefile main.py
+
+
+- gamestatemanager
+- build 81 x 81 grid
+- hovering effect
+- inserting numbers
+- game logic
