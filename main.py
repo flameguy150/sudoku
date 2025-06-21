@@ -10,9 +10,13 @@ All will be stored in neo folder under src
 GLOBAL VARIABLES IN src.neo.config
 '''
 import pygame
+from pygame import mixer
+import os
+import sys
 from src.neo.config import WIDTH, HEIGHT, WHITE, BLACK, FPS
 from src.neo import globals
 from src.neo.gameState import main_menu
+from src.neo.utils import resource_path
 
 pygame.init()
 
@@ -20,12 +24,20 @@ pygame.init()
 globals.screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("sudoku")
 
-#INIT
+#----MUSIC--------------------------------------------------------------------
+song = resource_path(os.path.join("assets/sounds", "flowers.mp3"))
+mixer.music.load(song)
+
+mixer.init() 
+mixer.music.load(song) 
+mixer.music.set_volume(0.7) 
+mixer.music.play(-1, 0.0) 
+#----INIT--------------------------------------------------------------------
 clock = pygame.time.Clock()
 globals.custom_font = pygame.font.Font('assets/fonts/FSEX300.TTF', 30)
 
 
-# Game loop
+# Game loop--------------------------------------------------------------------
 running = True
 globals.screen.fill(BLACK)  # Fill the background with black
 
