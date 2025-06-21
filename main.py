@@ -10,7 +10,7 @@ All will be stored in neo folder under src
 GLOBAL VARIABLES IN src.neo.config
 '''
 import pygame
-from src.neo.config import WIDTH, HEIGHT, WHITE, BLACK
+from src.neo.config import WIDTH, HEIGHT, WHITE, BLACK, FPS
 from src.neo import globals
 from src.neo.gameState import main_menu
 
@@ -20,9 +20,17 @@ pygame.init()
 globals.screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("sudoku")
 
+#INIT
+clock = pygame.time.Clock()
+globals.custom_font = pygame.font.Font('assets/fonts/FSEX300.TTF', 30)
+
+
 # Game loop
 running = True
+globals.screen.fill(BLACK)  # Fill the background with black
+
 while running:
+    clock.tick(FPS)
     # ----EVENT HANDLING--------------------------------------------------------
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
@@ -33,7 +41,6 @@ while running:
 
 
     #-----DRAWING--------------------------------------------------
-    # screen.fill(BLACK)  # Fill the background with black
     main_menu()
 
     # -------------------------------------------------------------
