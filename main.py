@@ -20,6 +20,10 @@ from src.neo.utils import resource_path, mute_music
 
 pygame.init()
 
+# Icon
+icon_image = pygame.image.load('assets/art/icon_256.png') 
+pygame.display.set_icon(icon_image)
+
 # Set up display dimensions
 globals.screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("sudoku")
