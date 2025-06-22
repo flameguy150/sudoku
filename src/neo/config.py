@@ -1,5 +1,5 @@
 # Screen variables
-WIDTH= 800
+WIDTH= 600
 HEIGHT = 600
 
 #colors
@@ -10,7 +10,9 @@ GREEN = (0,255,0)
 BLUE = (0,0,255)
 
 TITLE_MENU_BG = (234, 212, 252)
+GAME_BG = (234, 212, 252)
 
 
 #Game
 FPS = 60
+

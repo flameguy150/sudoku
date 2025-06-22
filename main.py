@@ -16,7 +16,7 @@ import sys
 from src.neo.config import WIDTH, HEIGHT, WHITE, BLACK, FPS
 from src.neo import globals
 from src.neo.gameState import gameStateManager
-from src.neo.utils import resource_path
+from src.neo.utils import resource_path, mute_music
 
 pygame.init()
 
@@ -26,12 +26,15 @@ pygame.display.set_caption("sudoku")
 
 #----MUSIC--------------------------------------------------------------------
 song = resource_path(os.path.join("assets/sounds", "flowers.mp3"))
-mixer.music.load(song)
 
+globals.mute_flag = False
 mixer.init() 
-mixer.music.load(song) 
-mixer.music.set_volume(0.7) 
-mixer.music.play(-1, 0.0) 
+globals.SUDOKU_DJ = mixer.music
+
+# Configure and play music
+globals.SUDOKU_DJ.load(song) 
+globals.SUDOKU_DJ.set_volume(0.7) 
+globals.SUDOKU_DJ.play(-1, 0.0) 
 #----INIT--------------------------------------------------------------------
 clock = pygame.time.Clock()
 globals.custom_font = pygame.font.Font('assets/fonts/FSEX300.TTF', 30)
@@ -48,7 +51,11 @@ while globals.running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             globals.running = False
-        
+        if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_m:
+                     globals.mute_flag = not globals.mute_flag
+                     mute_music()
+
         game.get_input(event)
         game.run()
         pygame.display.flip
