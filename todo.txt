@@ -7,3 +7,4 @@ pyinstaller --onefile main.py
 - hovering effect
 - inserting numbers
 - game logic
+- animate text

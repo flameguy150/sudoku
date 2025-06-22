@@ -15,7 +15,7 @@ import os
 import sys
 from src.neo.config import WIDTH, HEIGHT, WHITE, BLACK, FPS
 from src.neo import globals
-from src.neo.gameState import main_menu
+from src.neo.gameState import gameStateManager
 from src.neo.utils import resource_path
 
 pygame.init()
@@ -38,22 +38,24 @@ globals.custom_font = pygame.font.Font('assets/fonts/FSEX300.TTF', 30)
 
 
 # Game loop--------------------------------------------------------------------
-running = True
+globals.running = True
 globals.screen.fill(BLACK)  # Fill the background with black
-
-while running:
+game = gameStateManager()
+game.run() #main menu
+while globals.running:
     clock.tick(FPS)
     # ----EVENT HANDLING--------------------------------------------------------
     for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE: #ESCAPE = QUIT BUTTON
-                running = False
         if event.type == pygame.QUIT:
-            running = False
+            globals.running = False
+        
+        game.get_input(event)
+        game.run()
+        pygame.display.flip
 
 
     #-----DRAWING--------------------------------------------------
-    main_menu()
+    
 
     # -------------------------------------------------------------
     pygame.display.flip()
