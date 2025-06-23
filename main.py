@@ -13,7 +13,7 @@ import pygame
 from pygame import mixer
 import os
 import sys
-from src.neo.config import WIDTH, HEIGHT, WHITE, BLACK, FPS
+from src.neo.config import WHITE, BLACK, FPS
 from src.neo import globals
 from src.neo.gameState import gameStateManager
 from src.neo.utils import resource_path, mute_music
@@ -25,7 +25,7 @@ icon_image = pygame.image.load('assets/art/icon_256.png')
 pygame.display.set_icon(icon_image)
 
 # Set up display dimensions
-globals.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+globals.screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT),pygame.RESIZABLE)
 pygame.display.set_caption("sudoku")
 
 #----MUSIC--------------------------------------------------------------------
@@ -55,10 +55,14 @@ while globals.running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             globals.running = False
-        if event.type == pygame.KEYDOWN:
+        elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:
                      globals.mute_flag = not globals.mute_flag
                      mute_music()
+        elif event.type == pygame.VIDEORESIZE:
+                # Update screen dimensions and recreate the display surface
+                globals.WIDTH, globals.HEIGHT = event.w, event.h
+                screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT), pygame.RESIZABLE)
 
         game.get_input(event)
         game.run()
