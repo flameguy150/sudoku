@@ -10,3 +10,6 @@ custom_font = None
 #Music
 mute_flag = None
 SUDOKU_DJ = None
+
+#event
+curr_event = None

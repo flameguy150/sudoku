@@ -2,9 +2,19 @@ pip install pyinstaller
 pyinstaller --onefile main.py
 
 
-- gamestatemanager
-- build 81 x 81 grid
-- hovering effect
-- inserting numbers
-- game logic
-- animate text
+- [ ] gamestatemanager
+- [ ] build 9 x 9 grid
+    - [x] build 9x9 example
+    - [x] cell class, create cell       - july2/2025
+    - [ ] hover highlight function
+        - [x] first track mouse MOUSEMOTION         - july2/2025
+        ----LOG
+            going to implement level class so i can get input outside of game management state
+        -----
+        - [x] then print statements to see if highlight works         - july2/2025
+        - [X] lastly, implement change cell to change color         - july2/2025
+    - [ ] build 3x3 system to build 9x9
+- [ ] hovering effect
+- [ ] inserting numbers
+- [ ] game logic
+- [ ] animate text

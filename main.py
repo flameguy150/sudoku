@@ -53,16 +53,19 @@ while globals.running:
     clock.tick(FPS)
     # ----EVENT HANDLING--------------------------------------------------------
     for event in pygame.event.get():
+        globals.curr_event = event
+        
         if event.type == pygame.QUIT:
             globals.running = False
         elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:
                      globals.mute_flag = not globals.mute_flag
                      mute_music()
-        elif event.type == pygame.VIDEORESIZE:
-                # Update screen dimensions and recreate the display surface
-                globals.WIDTH, globals.HEIGHT = event.w, event.h
-                screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT), pygame.RESIZABLE)
+        # FOR WINDOW RESIZE
+        # elif event.type == pygame.VIDEORESIZE:
+        #         # Update screen dimensions and recreate the display surface
+        #         globals.WIDTH, globals.HEIGHT = event.w, event.h
+        #         screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT), pygame.RESIZABLE)
 
         game.get_input(event)
         game.run()
