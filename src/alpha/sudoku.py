@@ -1,7 +1,7 @@
 import pygame
 from pygame import mixer
 import random
-from alpha.sudoku_boards import easygrid1_, easygrid1_solution, is_valid, _board
+from sudoku_boards import easygrid1_, easygrid1_solution, is_valid, _board
 import os
 import sys
 
@@ -29,12 +29,12 @@ input_num_print_list = [] #to delete off screen everytime input_num changes
 
 hovered = False
 
-song = os.path.join("../sounds", "RLbeat2.mp3")
+# song = os.path.join("../sounds", "RLbeat2.mp3")
 
-mixer.init() 
-mixer.music.load(song) 
-mixer.music.set_volume(0.7) 
-mixer.music.play(-1, 0.0) 
+# mixer.init() 
+# mixer.music.load(song) 
+# mixer.music.set_volume(0.7) 
+# mixer.music.play(-1, 0.0) 
 
 number_of_cells = 0 #keeping track if all 81 cells are in the cells list
 

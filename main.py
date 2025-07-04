@@ -13,6 +13,7 @@ import pygame
 from pygame import mixer
 import os
 import sys
+import time
 from src.neo.config import WHITE, BLACK, FPS
 from src.neo import globals
 from src.neo.gameState import gameStateManager
@@ -62,10 +63,11 @@ while globals.running:
                      globals.mute_flag = not globals.mute_flag
                      mute_music()
         # FOR WINDOW RESIZE
-        # elif event.type == pygame.VIDEORESIZE:
-        #         # Update screen dimensions and recreate the display surface
-        #         globals.WIDTH, globals.HEIGHT = event.w, event.h
-        #         screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT), pygame.RESIZABLE)
+        elif event.type == pygame.VIDEORESIZE:
+                # Update screen dimensions and recreate the display surface
+                globals.WIDTH, globals.HEIGHT = event.w, event.h
+                screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT), pygame.RESIZABLE)
+                
 
         game.get_input(event)
         game.run()

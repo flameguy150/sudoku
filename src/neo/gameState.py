@@ -25,6 +25,9 @@ class Cell:
         self.number = 0
         
     def create_cell(self, color):
+        '''
+        cell outline should be -1 if 600x600
+        '''
         cell_outline = pygame.draw.rect(globals.screen, BLACK, pygame.Rect(self.left - 1, self.top - 1, self.width + 2, self.height + 2))
         cell_rect = pygame.draw.rect(globals.screen, color, pygame.Rect(self.left, self.top, self.width, self.height))
         self.rect = cell_rect
@@ -33,14 +36,14 @@ class Cell:
         '''
         redraw rectangle with same coordinates of current cell
         '''
-        # cell_outline = pygame.draw.rect(globals.screen, BLACK, pygame.Rect(self.left - 1, self.top - 1, self.width + 1, self.height + 1))
-        cell_rect = pygame.draw.rect(globals.screen, color, pygame.Rect(self.left, self.top, self.width - 1, self.height - 1))
-        self.rect = cell_rect
+        cell_outline = pygame.draw.rect(globals.screen, BLACK, pygame.Rect(self.left - 1, self.top - 1, self.width + 1, self.height + 1))
+        cell_rect = pygame.draw.rect(globals.screen, color, pygame.Rect(self.left, self.top, self.width-1, self.height-1))
+        # self.rect = cell_rect
 
     def highlight(self, event):
         if event.type == pygame.MOUSEMOTION:
             if self.rect.collidepoint(pygame.mouse.get_pos()):
-                print("highlighting!")
+                # print("highlighting!")
                 self.change_cell(RED)
 
 
@@ -76,11 +79,11 @@ class Grid:
         to smoothe out corners, replace the code for horizontal grid lines with this:
         self.draw_line(BLACK, horizontal_offset - 2, vertical_offset + (x*(3*height)), globals.WIDTH - horizontal_offset, vertical_offset + (x*(3*height)), 5)   
         '''
-        horizontal_offset = globals.WIDTH//8 #75 -- 450 -- 75
-        vertical_offset = globals.HEIGHT//8 # 75- -- 450 -- 75
+        horizontal_offset = globals.WIDTH/8 #75 -- 450 -- 75 // 125 -- 750 -- 125
+        vertical_offset = globals.HEIGHT/8 # 75- -- 450 -- 75 // 100 -- 600 -- 100
 
-        width = globals.WIDTH//12
-        height = globals.HEIGHT//12 # DEFAULT = 50 (600/12)
+        width = globals.WIDTH/12
+        height = globals.HEIGHT/12 # DEFAULT = 50 (600/12)
 
         for column in range(9):
             for row in range(9):
@@ -91,9 +94,18 @@ class Grid:
                 #create white cells init
                 cell = Cell(globals.screen, WHITE, left, top, width, height)  
                 self.array_of_cells.append(cell)
+        
+    def draw_grid_outlines(self):
+        '''
+        to future me or someone else, why make a seperate function for the grid outlines? 
+        so the highlight function doesn't draw over the grid and make the squares pop
+        '''
+        horizontal_offset = globals.WIDTH/8 #75 -- 450 -- 75 // 125 -- 750 -- 125
+        vertical_offset = globals.HEIGHT/8 # 75- -- 450 -- 75 // 100 -- 600 -- 100
 
+        width = globals.WIDTH/12
+        height = globals.HEIGHT/12 # DEFAULT = 50 (600/12)
 
-        #grid outlines
         for i in range(4): #vertical lines
             self.draw_line(BLACK, horizontal_offset + (i*(3*width)), vertical_offset, horizontal_offset + (i*(3*width)), globals.HEIGHT - vertical_offset, 5)
         for x in range(4): #horizontal lines
@@ -208,6 +220,8 @@ class gameStateManager:
 
         for cell in grid.array_of_cells:
             cell.highlight(globals.curr_event)
+        
+        grid.draw_grid_outlines() 
 
 
     def settings(self):

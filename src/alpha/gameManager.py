@@ -1,7 +1,7 @@
 import pygame
 import sys
-from alpha.sudoku import Cell, Grid, mainloop
-from alpha.sudoku_boards import easygrid1_, easygrid1_solution, is_valid, _board
+from sudoku import Cell, Grid, mainloop
+from sudoku_boards import easygrid1_, easygrid1_solution, is_valid, _board
 
 
 FPS = 60
