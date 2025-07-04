@@ -1,6 +1,8 @@
 # Sudoku
 Made with pygame
 
+Second implementation
+
 ![image](https://github.com/user-attachments/assets/ad8d161f-b7e8-498e-beb1-d84dd691c90d)
 
 ## How to run
@@ -11,18 +13,25 @@ git clone https://github.com/flameguy150/sudoku.git
 cd sudoku
 ```
 
-1. Activate venv
+2. Create and activate a virtual environment
 ```bash
-venv\Scripts\activate #Windows
-source venv/bin/activate #macOS/Linux
+py -m venv .venv
+
+(Windows)
+.\.venv\Scripts\Activate.ps1
+
+(Mac/Linux)
+source .venv/bin/activate
 ```
 
-1. Install dependencies
-``` bash
+3. Install dependencies:
+
+```bash
 pip install -r requirements.txt
-```
 
-1. Run Game
-``` bash
-python main.py
+```
+4. Run file
+```bash
+windows: py main.py
+mac/linux: python3 main.py
 ```
