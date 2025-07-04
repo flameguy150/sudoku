@@ -6,6 +6,9 @@ screen = None
 running = None
 custom_font = None
 
+# Game variables
+grid = None
+
 
 #Music
 mute_flag = None

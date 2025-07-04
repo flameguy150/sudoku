@@ -16,7 +16,7 @@ import sys
 import time
 from src.neo.config import WHITE, BLACK, FPS
 from src.neo import globals
-from src.neo.gameState import gameStateManager
+from src.neo.gameState import gameStateManager, Grid
 from src.neo.utils import resource_path, mute_music
 
 pygame.init()
@@ -50,6 +50,7 @@ globals.running = True
 globals.screen.fill(BLACK)  # Fill the background with black
 game = gameStateManager()
 game.run() #main menu
+globals.grid = Grid()
 while globals.running:
     clock.tick(FPS)
     # ----EVENT HANDLING--------------------------------------------------------

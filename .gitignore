@@ -3,6 +3,9 @@ venv/
 __pycache__/
 *.pyc
 
+src/alpha/__pycache__/
 src/neo/__pycache__/
 
 .DS_Store
+
+git rm -r --cached .DS_Store '*.pyc' __pycache__ 
