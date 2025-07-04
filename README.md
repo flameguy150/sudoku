@@ -11,19 +11,26 @@ git clone https://github.com/flameguy150/sudoku.git
 cd sudoku
 ```
 
-2. Install pygame
+2. Create and activate a virtual environment
 ```bash
-pip install pygame
+py -m venv .venv
+
+(Windows)
+.\.venv\Scripts\Activate.ps1
+
+(Mac/Linux)
+source .venv/bin/activate
 ```
 
-3. Run file
-   
-windows:
-```bash
-py sudoku.py
-```
-mac: 
-```bash
-python3 sudoku.py
-```
+3. Install dependencies:
 
+```bash
+pip install -r requirements.txt
+
+```
+4. Run file
+```bash
+windows: py main.py
+mac/linux: python3 main.py
+```
+---
