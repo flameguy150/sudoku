@@ -5,6 +5,9 @@ __pycache__/
 
 src/alpha/__pycache__/
 src/neo/__pycache__/
+src/neo/config/__pycache__/
+src/neo/core/__pycache__/
+src/neo/ui/__pycache__/
 
 .DS_Store
 <<<<<<< HEAD

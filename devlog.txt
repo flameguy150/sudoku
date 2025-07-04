@@ -1,0 +1,6 @@
+july4/2025... I'm off to advanced camp! -----------------------
+
+fixed highlight bug
+implemented polished number insert
+mass file organization, this project is getting big 
+---------------------------------------------------------------

@@ -1,7 +1,7 @@
 '''for music'''
 import os
 import sys
-from src.neo import globals
+from src.neo.config import globals
 
 
 def resource_path(relative_path):

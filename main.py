@@ -14,10 +14,11 @@ from pygame import mixer
 import os
 import sys
 import time
-from src.neo.config import WHITE, BLACK, FPS
-from src.neo import globals
-from src.neo.gameState import gameStateManager, Grid
-from src.neo.utils import resource_path, mute_music
+from src.neo.config.constants import WHITE, BLACK, FPS
+from src.neo.config import globals
+from src.neo.ui.gameState import gameStateManager
+from src.neo.core.grid import Grid
+from src.neo.utils.utilities import resource_path, mute_music
 
 pygame.init()
 
@@ -51,6 +52,7 @@ globals.screen.fill(BLACK)  # Fill the background with black
 game = gameStateManager()
 game.run() #main menu
 globals.grid = Grid()
+globals.grid.print_grid_array() #debug
 while globals.running:
     clock.tick(FPS)
     # ----EVENT HANDLING--------------------------------------------------------
@@ -68,11 +70,13 @@ while globals.running:
                 # Update screen dimensions and recreate the display surface
                 globals.WIDTH, globals.HEIGHT = event.w, event.h
                 screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT), pygame.RESIZABLE)
+                globals.grid.resize_array()
+                pygame.display.flip()
                 
 
         game.get_input(event)
-        game.run()
-        pygame.display.flip
+        game.run() # this can display different screen
+        pygame.display.flip()
 
 
     #-----DRAWING--------------------------------------------------
