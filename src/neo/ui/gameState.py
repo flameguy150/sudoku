@@ -31,6 +31,20 @@ class gameStateManager:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     self.state = "menu"
+                else:
+                    keymap = {
+                        pygame.K_1: 1,
+                        pygame.K_2: 2,
+                        pygame.K_3: 3,
+                        pygame.K_4: 4,
+                        pygame.K_5: 5,
+                        pygame.K_6: 6,
+                        pygame.K_7: 7,
+                        pygame.K_8: 8,
+                        pygame.K_9: 9
+                    }
+                    if event.key in keymap:
+                        globals.holding_num = keymap[event.key]
 
     def run(self):
         if self.state == "menu":
@@ -62,6 +76,7 @@ class gameStateManager:
         for cell in globals.grid.array_of_cells:
             cell.highlight(globals.curr_event)
             cell.insert_number(globals.curr_event)
+            
         
         globals.grid.draw_grid_outlines() 
 

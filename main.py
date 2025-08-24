@@ -51,7 +51,8 @@ globals.running = True
 globals.screen.fill(BLACK)  # Fill the background with black
 game = gameStateManager()
 game.run() #main menu
-globals.grid = Grid()
+globals.grid = Grid() #Init grid here
+
 globals.grid.print_grid_array() #debug
 while globals.running:
     clock.tick(FPS)

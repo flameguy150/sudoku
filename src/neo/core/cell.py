@@ -50,11 +50,11 @@ class Cell:
         basically, if left click on mouse button is pressed down and cursor is hovered over cell
         '''
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.rect.collidepoint(pygame.mouse.get_pos()):
-            self.change_cell(WHITE, num = 1)
+            self.change_cell(WHITE, globals.holding_num)
     
     def draw_number(self):
         if self.number != 0: #dont draw empty cells
-            text_surface = globals.custom_font.render(str(self.number), True, GREEN)
+            text_surface = globals.custom_font.render(str(self.number), True, BLUE)
             globals.screen.blit(text_surface, self.rect)#replace rectangle with new white rectangle w number
             self.filled = True
             

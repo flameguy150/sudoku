@@ -107,7 +107,10 @@ class Grid:
         i = 0
         for cell in self.array_of_cells:
             if i < 8:
-                print(cell.position, end = " ")
+                if cell.position < 10:
+                    print(cell.position, end = "  ")
+                else:
+                    print(cell.position, end = " ")
                 i += 1
             else:
                 print(cell.position, end = " ")
