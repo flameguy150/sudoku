@@ -18,6 +18,7 @@ SUDOKU_DJ = None
 
 #event
 curr_event = None
+screen_info = True
 
 #controls
 holding_num = 1

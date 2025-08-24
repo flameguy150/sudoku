@@ -18,7 +18,7 @@ from src.neo.config.constants import WHITE, BLACK, FPS
 from src.neo.config import globals
 from src.neo.ui.gameState import gameStateManager
 from src.neo.core.grid import Grid
-from src.neo.utils.utilities import resource_path, mute_music
+from src.neo.utils.utilities import resource_path, mute_music, display_w_h
 
 pygame.init()
 
@@ -66,6 +66,8 @@ while globals.running:
                 if event.key == pygame.K_m:
                      globals.mute_flag = not globals.mute_flag
                      mute_music()
+                if event.key == pygame.K_f:
+                      globals.screen_info = not globals.screen_info
         # FOR WINDOW RESIZE
         elif event.type == pygame.VIDEORESIZE:
                 # Update screen dimensions and recreate the display surface
@@ -74,9 +76,10 @@ while globals.running:
                 globals.grid.resize_array()
                 pygame.display.flip()
                 
-
         game.get_input(event)
         game.run() # this can display different screen
+        if globals.screen_info == True:
+            display_w_h() #display width and height in top left corner
         pygame.display.flip()
 
 
