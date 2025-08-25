@@ -4,3 +4,11 @@ fixed highlight bug
 implemented polished number insert
 mass file organization, this project is getting big 
 ---------------------------------------------------------------
+
+AUG24/2025... School tomorrow... -----------------------
+
+Number input controls
+Setting hud overlay
+font resize
+setting hud overlay - options displayed
+---------------------------------------------------------------

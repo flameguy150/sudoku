@@ -18,7 +18,7 @@ from src.neo.config.constants import WHITE, BLACK, FPS
 from src.neo.config import globals
 from src.neo.ui.gameState import gameStateManager
 from src.neo.core.grid import Grid
-from src.neo.utils.utilities import resource_path, mute_music, display_w_h
+from src.neo.utils.utilities import resource_path, mute_music, display_w_h, resize_font
 
 pygame.init()
 
@@ -43,7 +43,12 @@ globals.SUDOKU_DJ.set_volume(0.7)
 globals.SUDOKU_DJ.play(-1, 0.0) 
 #----INIT--------------------------------------------------------------------
 clock = pygame.time.Clock()
-globals.custom_font = pygame.font.Font('assets/fonts/FSEX300.TTF', 30)
+normal = globals.WIDTH//25
+small = globals.WIDTH//30
+globals.font_number_size = pygame.font.Font('assets/fonts/FSEX300.TTF', normal)
+globals.custom_font = pygame.font.Font('assets/fonts/FSEX300.TTF', normal)
+globals.cf_small = pygame.font.Font('assets/fonts/FSEX300.TTF', small)
+
 
 
 # Game loop--------------------------------------------------------------------
@@ -74,6 +79,7 @@ while globals.running:
                 globals.WIDTH, globals.HEIGHT = event.w, event.h
                 screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT), pygame.RESIZABLE)
                 globals.grid.resize_array()
+                resize_font()
                 pygame.display.flip()
                 
         game.get_input(event)

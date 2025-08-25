@@ -29,7 +29,7 @@ class gameStateManager:
                     self.settings_event = "menu"
                     self.state = "settings"
                 #if main menu and press play
-                elif event.key == pygame.K_p:
+                elif event.key == pygame.K_RETURN:
                     self.state = "game"
 
         #if in game
@@ -83,7 +83,7 @@ class gameStateManager:
         
         # texts
         custom_text = globals.custom_font.render("Welcome to Sudoku!", True, (140, 37, 150)) # Green text
-        MSG = globals.custom_font.render("Press p to play", True, (100, 137, 150)) # Green text
+        MSG = globals.custom_font.render("Press enter to play", True, (100, 137, 150)) # Green text
         # draw text
         globals.screen.blit(custom_text, (globals.WIDTH // 2 - custom_text.get_width() // 2, 100)) # Center the text horizontally
         globals.screen.blit(MSG, (globals.WIDTH // 2 - MSG.get_width() // 2, 200)) # Center the text horizontally
@@ -106,7 +106,12 @@ class gameStateManager:
 
 
     def settings(self, curr_state):
-          """curr state is self.settings_event"""
+          """
+          curr state is self.settings_event
+          settings:
+            restart
+            Go home (saves game)
+          """
           if curr_state == "menu":
               self.main_menu()
           elif curr_state == "game":
@@ -120,8 +125,29 @@ class gameStateManager:
           translucent_surface = pygame.Surface((box_width, box_height), pygame.SRCALPHA)
           pygame.draw.rect(translucent_surface, box_color, (0, 0, box_width, box_height))
 
-          # Blit the translucent box onto the main screen
+          # blit the translucent box onto the main screen
           globals.screen.blit(translucent_surface, (globals.WIDTH/12, globals.HEIGHT/12))
+
+          #Settings Options
+          x_pos = 5*(globals.WIDTH/12)
+          y_pos = 3*(globals.HEIGHT/12)
+          home_y = 5*(globals.HEIGHT/12)
+
+          restart_text = globals.cf_small.render("Clear Board", True, (100, 137, 150)) # Green text
+        #   home_text = None
+          if curr_state == "menu":
+              exit_text = globals.cf_small.render("Exit Game", True, (100, 137, 150)) #autosaves
+              globals.screen.blit(exit_text, (x_pos, home_y))
+          else:
+              home_text = globals.cf_small.render("Go Home", True, (100, 137, 150)) #autosaves
+              globals.screen.blit(home_text, (x_pos, home_y))
+
+          # blit the options onto the main screen
+          
+          globals.screen.blit(restart_text, (x_pos, y_pos))
+
+
+          #update display
           pygame.display.flip()
           
 

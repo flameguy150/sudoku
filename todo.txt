@@ -2,31 +2,33 @@ pip install pyinstaller
 pyinstaller --onefile main.py
 
 
-- [x] gamestatemanager
-- [ ] build 9 x 9 grid
-    - [x] build 9x9 example
-    - [x] cell class, create cell       - july2/2025
-    - [x] hover highlight function
-        - [x] first track mouse MOUSEMOTION         - july2/2025
+- [X] gamestatemanager
+- [X] build 9 x 9 grid
+    - [X] build 9x9 example
+    - [X] cell class, create cell       - july2/2025
+    - [X] hover highlight function
+        - [X] first track mouse MOUSEMOTION         - july2/2025
         ----LOG
             going to implement level class so i can get input outside of game management state
         -----
-        - [x] then print statements to see if highlight works         - july2/2025
+        - [X] then print statements to see if highlight works         - july2/2025
         - [X] lastly, implement change cell to change color         - july2/2025
-        - [ ] need to polish up highlighting system
-    - [ ] build 3x3 system to build 9x9
-- [x] hovering effect
-    - [x] does not highlight cells with numbers inside        - july4/2025... I'm off to advanced camp!
+        - [X] need to polish up highlighting system
+- [X] hovering effect
+    - [X] does not highlight cells with numbers inside        - july4/2025... I'm off to advanced camp!
 - [ ] inserting numbers
-    - [x] first make cell change color to indicate mouse click works        - july4/2025
-    - [x] next, print number        - july4/2025... I'm off to advanced camp!
-    - [x] last, make number stay        - july4/2025... I'm off to advanced camp!
+    - [X] first make cell change color to indicate mouse click works        - july4/2025
+    - [X] next, print number        - july4/2025... I'm off to advanced camp!
+    - [X] last, make number stay        - july4/2025... I'm off to advanced camp!
             - need to make grid a global variable
-    - [ ] center number in cell
+    - [X] center number in cell
 - [ ] game logic
     - [ ] generating sudoku board
     - [ ] valid inputted number
 - [ ] animate text
+
+-[ ] Settings
+    - [ ] Make it so you can't click on grid while in settings
 
 
 

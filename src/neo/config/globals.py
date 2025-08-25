@@ -4,7 +4,9 @@ HEIGHT = 600
 
 screen = None
 running = None
+font_number_size = None
 custom_font = None
+cf_small = None
 
 # Game variables
 grid = None
