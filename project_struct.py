@@ -1,0 +1,1 @@
+'''To easily create project structure tree'''

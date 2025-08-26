@@ -1,0 +1,18 @@
+.history/
+venv/
+__pycache__/
+*.pyc
+
+src/alpha/__pycache__/
+src/neo/__pycache__/
+src/neo/config/__pycache__/
+src/neo/core/__pycache__/
+src/neo/ui/__pycache__/
+
+assets/art/flower/New Piskel-20250826-015329.piskel
+
+.DS_Store
+<<<<<<< HEAD
+
+=======
+>>>>>>> 012915d32dc4f45d277ad2dbea73abf258e011f1

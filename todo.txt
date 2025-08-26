@@ -1,0 +1,44 @@
+pip install pyinstaller
+pyinstaller --onefile main.py
+
+
+- [X] gamestatemanager
+- [X] build 9 x 9 grid
+    - [X] build 9x9 example
+    - [X] cell class, create cell       - july2/2025
+    - [X] hover highlight function
+        - [X] first track mouse MOUSEMOTION         - july2/2025
+        ----LOG
+            going to implement level class so i can get input outside of game management state
+        -----
+        - [X] then print statements to see if highlight works         - july2/2025
+        - [X] lastly, implement change cell to change color         - july2/2025
+        - [X] need to polish up highlighting system
+- [X] hovering effect
+    - [X] does not highlight cells with numbers inside        - july4/2025... I'm off to advanced camp!
+- [X] inserting numbers
+    - [X] first make cell change color to indicate mouse click works        - july4/2025
+    - [X] next, print number        - july4/2025... I'm off to advanced camp!
+    - [X] last, make number stay        - july4/2025... I'm off to advanced camp!
+            - need to make grid a global variable
+    - [X] center number in cell
+- [ ] game logic
+    - [ ] generating sudoku board
+    - [ ] valid inputted number
+- [ ] animate text
+
+-[ ] Settings
+    - [X] Make it so you can't click on grid while in settings
+    - [X] hud overlay
+    - [X] settings options appear
+    - [ ] settings options work
+    - [ ] new game
+    = [ ] save game
+
+= [ ] animations
+    = [X] animated flower
+
+
+
+
+

@@ -1,0 +1,19 @@
+july4/2025... I'm off to advanced camp! -----------------------
+
+fixed highlight bug
+implemented polished number insert
+mass file organization, this project is getting big 
+---------------------------------------------------------------
+
+AUG24/2025... School tomorrow... -----------------------
+
+Number input controls
+Setting hud overlay
+font resize
+setting hud overlay - options displayed
+---------------------------------------------------------------
+
+AUG26_2025... its like 1 am... cant sleep ---------------------
+Players cant click on stuff during settings hud overlay
+animated flwer, organized game loop
+---------------------------------------------------------------
