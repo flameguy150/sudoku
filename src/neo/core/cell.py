@@ -37,8 +37,9 @@ class Cell:
         '''
         another huge if statement
         basically, if mouse is hovered over cell that has not been filled with a number
+        AND now if player is not in hud overlay, prevents them from playing while in settings. Might change honestly, not the worst feature
         '''
-        if event.type == pygame.MOUSEMOTION and self.rect.collidepoint(pygame.mouse.get_pos()) and not self.filled:
+        if event.type == pygame.MOUSEMOTION and self.rect.collidepoint(pygame.mouse.get_pos()) and not self.filled and globals.settings_on == False:
                 # print("highlighting!")
                 self.change_cell(RED)
 
@@ -48,8 +49,9 @@ class Cell:
 
         ikr big if statement
         basically, if left click on mouse button is pressed down and cursor is hovered over cell
+        AND now if player is not in hud overlay, prevents them from playing while in settings. Might change honestly, not the worst feature
         '''
-        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.rect.collidepoint(pygame.mouse.get_pos()):
+        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.rect.collidepoint(pygame.mouse.get_pos()) and globals.settings_on == False:
             self.change_cell(WHITE, globals.holding_num)
     
     def draw_number(self):

@@ -24,3 +24,9 @@ screen_info = True
 
 #controls
 holding_num = 1
+
+#settings
+settings_on = False
+
+#flower
+flower = None

@@ -1,6 +1,7 @@
 import pygame
 from src.neo.config import globals
 from src.neo.config.constants import RED, TITLE_MENU_BG, GAME_BG, WHITE, BLACK, BLUE, GREEN
+from src.neo.ui.flower import Flower
 
 '''
 ------------------------   GAME STATE MANAGER  ------------------------   ------------------------   ------------------------   
@@ -28,6 +29,8 @@ class gameStateManager:
                 elif event.key == pygame.K_s:
                     self.settings_event = "menu"
                     self.state = "settings"
+                    # this is so players cannot click and insert numbers while in settings or enter game
+                    globals.settings_on = True
                 #if main menu and press play
                 elif event.key == pygame.K_RETURN:
                     self.state = "game"
@@ -42,6 +45,8 @@ class gameStateManager:
                 elif event.key == pygame.K_s:
                     self.settings_event = "game"
                     self.state = "settings"
+                    # this is so players cannot click and insert numbers while in settings or enter game
+                    globals.settings_on = True
                 #input num control
                 else:
                     keymap = {
@@ -64,9 +69,12 @@ class gameStateManager:
                 if event.key == pygame.K_s:
                     if self.settings_event == "menu":
                         self.state = "menu"
+                        globals.settings_on = False
                     elif self.settings_event == "game":
                         self.state = "game"
-
+                        globals.settings_on = False
+                elif event.key == pygame.K_c:
+                    globals.grid.clear()
     def run(self):
         if self.state == "menu":
             # Menu_Level()
@@ -79,14 +87,16 @@ class gameStateManager:
     
     def main_menu(self):
         globals.screen.fill(TITLE_MENU_BG)
-
-        
         # texts
         custom_text = globals.custom_font.render("Welcome to Sudoku!", True, (140, 37, 150)) # Green text
         MSG = globals.custom_font.render("Press enter to play", True, (100, 137, 150)) # Green text
         # draw text
         globals.screen.blit(custom_text, (globals.WIDTH // 2 - custom_text.get_width() // 2, 100)) # Center the text horizontally
-        globals.screen.blit(MSG, (globals.WIDTH // 2 - MSG.get_width() // 2, 200)) # Center the text horizontally
+        globals.screen.blit(MSG, (globals.WIDTH // 2 - MSG.get_width() // 2, 200)) # Center the text horizontally\
+        #animate flower sprite
+        globals.flower.update()
+        globals.flower.draw(globals.screen)
+
         
 
     def in_game_screen(self):
@@ -133,10 +143,10 @@ class gameStateManager:
           y_pos = 3*(globals.HEIGHT/12)
           home_y = 5*(globals.HEIGHT/12)
 
-          restart_text = globals.cf_small.render("Clear Board", True, (100, 137, 150)) # Green text
-        #   home_text = None
+          restart_text = globals.cf_small.render("Clear Board (Press C)", True, (100, 137, 150)) # Green text
+        
           if curr_state == "menu":
-              exit_text = globals.cf_small.render("Exit Game", True, (100, 137, 150)) #autosaves
+              exit_text = globals.cf_small.render("Exit Game (Press Esc)", True, (100, 137, 150)) #autosaves
               globals.screen.blit(exit_text, (x_pos, home_y))
           else:
               home_text = globals.cf_small.render("Go Home", True, (100, 137, 150)) #autosaves

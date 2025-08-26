@@ -16,7 +16,7 @@ pyinstaller --onefile main.py
         - [X] need to polish up highlighting system
 - [X] hovering effect
     - [X] does not highlight cells with numbers inside        - july4/2025... I'm off to advanced camp!
-- [ ] inserting numbers
+- [X] inserting numbers
     - [X] first make cell change color to indicate mouse click works        - july4/2025
     - [X] next, print number        - july4/2025... I'm off to advanced camp!
     - [X] last, make number stay        - july4/2025... I'm off to advanced camp!
@@ -28,7 +28,17 @@ pyinstaller --onefile main.py
 - [ ] animate text
 
 -[ ] Settings
-    - [ ] Make it so you can't click on grid while in settings
+    - [X] Make it so you can't click on grid while in settings
+    - [X] hud overlay
+    - [X] settings options appear
+    - [ ] settings options work
+    - [ ] new game
+    = [ ] save game
+
+= [ ] animations
+    = [X] animated flower
+
+
 
 
 

@@ -94,8 +94,12 @@ class Grid:
                 cell_outline = pygame.draw.rect(globals.screen, BLACK, pygame.Rect(left - 1, top - 1, width + 2, height + 2))
                 cell_rect = pygame.draw.rect(globals.screen, WHITE, pygame.Rect(left, top, width, height))
 
-    def controls(self, event):
-        pass
+    def clear(self):
+        '''
+        will clear board, making it so no cells contain any numbers
+        '''
+        for cell in self.array_of_cells:
+            cell.number = 0
             
 
     # ---------- FOR DEBUGGING ------------------- ------------------- -------------------

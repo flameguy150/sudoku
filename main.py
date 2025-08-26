@@ -19,13 +19,18 @@ from src.neo.config import globals
 from src.neo.ui.gameState import gameStateManager
 from src.neo.core.grid import Grid
 from src.neo.utils.utilities import resource_path, mute_music, display_w_h, resize_font
+from src.neo.ui.flower import Flower
 
 pygame.init()
 
 # Icon
-icon_image = pygame.image.load('assets/art/icon_256.png') 
+icon_image = pygame.image.load('assets/art/icon/icon_256.png') 
 pygame.display.set_icon(icon_image)
 
+#flower sprite init
+globals.flower = pygame.sprite.Group()
+_flower = Flower((globals.WIDTH/24)*11, (globals.HEIGHT/24)*11) #tried to center as much as possible lol
+globals.flower.add(_flower)
 # Set up display dimensions
 globals.screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT),pygame.RESIZABLE)
 pygame.display.set_caption("sudoku")
@@ -55,12 +60,13 @@ globals.cf_small = pygame.font.Font('assets/fonts/FSEX300.TTF', small)
 globals.running = True
 globals.screen.fill(BLACK)  # Fill the background with black
 game = gameStateManager()
-game.run() #main menu
-globals.grid = Grid() #Init grid here
+#runs and loads up main menu
+game.run() 
+#Init grid here
+globals.grid = Grid() 
 
 globals.grid.print_grid_array() #debug
 while globals.running:
-    clock.tick(FPS)
     # ----EVENT HANDLING--------------------------------------------------------
     for event in pygame.event.get():
         globals.curr_event = event
@@ -78,21 +84,25 @@ while globals.running:
                 # Update screen dimensions and recreate the display surface
                 globals.WIDTH, globals.HEIGHT = event.w, event.h
                 screen = pygame.display.set_mode((globals.WIDTH, globals.HEIGHT), pygame.RESIZABLE)
+                #grid resizes w window resize
                 globals.grid.resize_array()
-                resize_font()
+                #font resizes w window resize
+                resize_font() 
                 pygame.display.flip()
                 
         game.get_input(event)
-        game.run() # this can display different screen
-        if globals.screen_info == True:
+    game.run()
+    if globals.screen_info == True:
             display_w_h() #display width and height in top left corner
-        pygame.display.flip()
+    pygame.display.flip()
+    clock.tick(FPS)
+
 
 
     #-----DRAWING--------------------------------------------------
     
 
     # -------------------------------------------------------------
-    pygame.display.flip()
+    
 
-pygame.quit()
+

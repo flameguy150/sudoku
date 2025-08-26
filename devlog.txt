@@ -12,3 +12,8 @@ Setting hud overlay
 font resize
 setting hud overlay - options displayed
 ---------------------------------------------------------------
+
+AUG26_2025... its like 1 am... cant sleep ---------------------
+Players cant click on stuff during settings hud overlay
+animated flwer, organized game loop
+---------------------------------------------------------------
