@@ -157,8 +157,7 @@ class gameStateManager:
           globals.screen.blit(restart_text, (x_pos, y_pos))
 
 
-          #update display
-          pygame.display.flip()
+    
           
 
 
