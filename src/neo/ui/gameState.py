@@ -2,6 +2,7 @@ import pygame
 from src.neo.config import globals
 from src.neo.config.constants import RED, TITLE_MENU_BG, GAME_BG, WHITE, BLACK, BLUE, GREEN
 from src.neo.ui.flower import Flower
+from src.neo.core.board import _board
 
 '''
 ------------------------   GAME STATE MANAGER  ------------------------   ------------------------   ------------------------   

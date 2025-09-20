@@ -30,3 +30,7 @@ settings_on = False
 
 #flower
 flower = None
+
+#grid
+cell_grid = None
+board = None

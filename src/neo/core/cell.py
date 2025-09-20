@@ -26,6 +26,13 @@ class Cell:
 
         self.number = 0 # hold the number within sudoku board
         self.filled = False # bool to see if correct number has already been inserted
+
+        self.correct_number = 0
+
+    def init_rect(self):
+        '''This function exists so I can init rects for the cells, this is neccesary because we must generate the solution and board before actually running the game through game loop'''
+        cell_rect = pygame.draw.rect(globals.screen, self.color, pygame.Rect(self.left, self.top, self.width, self.height))
+        self.rect = cell_rect
     
     def draw_cell(self):
         cell_outline = pygame.draw.rect(globals.screen, BLACK, pygame.Rect(self.left - 1, self.top - 1, self.width + 2, self.height + 2))
@@ -52,7 +59,10 @@ class Cell:
         AND now if player is not in hud overlay, prevents them from playing while in settings. Might change honestly, not the worst feature
         '''
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.rect.collidepoint(pygame.mouse.get_pos()) and globals.settings_on == False:
-            self.change_cell(WHITE, globals.holding_num)
+            if self.number == self.correct_number:
+                print("can't change cell")
+            else:
+                self.change_cell(WHITE, globals.holding_num)
     
     def draw_number(self):
         if self.number != 0: #dont draw empty cells

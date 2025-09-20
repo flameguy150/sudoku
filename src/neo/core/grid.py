@@ -36,8 +36,10 @@ class Grid:
                 top = vertical_offset + (row)*height
 
                 cell = Cell(globals.screen, WHITE, left, top, width, height, cell_position_index)  
+                cell.init_rect()
                 self.array_of_cells.append(cell)
                 cell_position_index += 1
+        
     
     def resize_array(self):
         horizontal_offset = globals.WIDTH/8 #75 -- 450 -- 75 // 125 -- 750 -- 125
@@ -100,6 +102,41 @@ class Grid:
         '''
         for cell in self.array_of_cells:
             cell.number = 0
+
+    # ---------- FOR GENERATING PUZZLE ------------------------ --------------------------
+
+    def check_solution_9(self): # check if each row has all numbers by seeing if they add up to 45
+        sum = 0 # see if sum == 45
+        for i in range(9): #going through each row
+            if sum != 45 or sum != 0:
+                print("input is incorrect bro really? really now?")
+            sum = 0 #reset sum after checking one row
+            for j in range(9): # checking all elements in row
+                index_ = (3 * j) + i
+                sum += self.array_of_cells[index_].number # to access every cell, every cell should have indexes going 1-9 left to right, top to bottom, cells.index(cell)
+    
+    def check_solution(self):
+        correct = 0
+        for cell in self.array_of_cells:
+            if cell.number == cell.correct_number:
+                correct += 1
+            if correct == 81:
+                print("You won! Congratulations!")
+
+    def _createsolution(self, board):
+        for i in range (9): 
+            # go through every list, and sht
+            for j in range(9):
+                globals.cell_grid[i][j].correct_number = board[i][j]
+    
+    def generate_board(self, board): 
+        # generate grid (like easygrid1) wo solutions on board
+        for i in range(9):
+            for j in range(9):
+                globals.cell_grid[i][j].number = board[i][j]
+        for cell in globals.grid.array_of_cells:
+            if cell.number != 0:
+                cell.change_cell(color=WHITE, num=cell.number)
             
 
     # ---------- FOR DEBUGGING ------------------- ------------------- -------------------
@@ -120,4 +157,5 @@ class Grid:
                 print(cell.position, end = " ")
                 print()
                 i = 0
+        
     

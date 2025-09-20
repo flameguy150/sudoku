@@ -22,9 +22,16 @@ pyinstaller --onefile main.py
     - [X] last, make number stay        - july4/2025... I'm off to advanced camp!
             - need to make grid a global variable
     - [X] center number in cell
+    - [ ] Do not let players change number if correct num is already present
 - [ ] game logic
-    - [ ] generating sudoku board
-    - [ ] valid inputted number
+    - [X] generating sudoku board
+        - [X] have cells hold correct num
+        - [X] generate a valid board
+        - [X] transfer valid puzzle into actual grid cells (by throwing puzzle into globals.cell_grid)
+        - [X] make the solutions appear on screen
+    - [X] valid inputted number
+
+    
 - [ ] animate text
 
 -[ ] Settings
@@ -35,8 +42,8 @@ pyinstaller --onefile main.py
     - [ ] new game
     = [ ] save game
 
-= [ ] animations
-    = [X] animated flower
+- [X] animations
+    - [X] animated flower
 
 
 
