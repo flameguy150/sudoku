@@ -3,12 +3,11 @@
 Made with pygame
 
 Second implementation
-What's new?
-    * Game Icon!
-    * Animations and Title Screen!
-    * Settings!
-    * Saves game progress and can start a new game!
-    * Winner Screen!
+* Game Icon
+* Animations and Title Screen
+* Settings
+* Saves game progress and can start a new game
+* Winner Screen
 
 ![title](/assets/img/title.png)
 ![game](/assets/img/game.png)
