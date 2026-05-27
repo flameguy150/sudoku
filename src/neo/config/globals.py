@@ -2,9 +2,12 @@
 WIDTH= 600
 HEIGHT = 600
 
+#screen editing
 screen = None
-running = None
+running = None # game loop variable
 font_number_size = None
+
+#custom fonts
 custom_font = None
 cf_small = None
 
@@ -34,3 +37,10 @@ flower = None
 #grid
 cell_grid = None
 board = None
+
+random_cells = None # this will be used to randomize board
+init_flag = False #this to stop redrawing the beginning board everytime
+
+
+# number of correctly filled cells
+current_correct_cells = 0

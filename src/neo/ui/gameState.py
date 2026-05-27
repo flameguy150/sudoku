@@ -35,7 +35,10 @@ class gameStateManager:
                 #if main menu and press play
                 elif event.key == pygame.K_RETURN:
                     self.state = "game"
-
+            # if you press on the title screen with mouse, it enters game
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                self.state = "game"
+                
         #if in game
         elif self.state == "game":
             if event.type == pygame.KEYDOWN:
@@ -63,6 +66,7 @@ class gameStateManager:
                     }
                     if event.key in keymap:
                         globals.holding_num = keymap[event.key]
+                        print(f"holding num: {globals.holding_num}")
 
         #if in settings
         elif self.state == "settings":

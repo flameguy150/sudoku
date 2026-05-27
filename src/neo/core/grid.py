@@ -2,6 +2,7 @@ import pygame
 from src.neo.config import globals
 from src.neo.core.cell import Cell
 from src.neo.config.constants import RED, TITLE_MENU_BG, GAME_BG, WHITE, BLACK, BLUE, GREEN
+import random
 
 
 class Grid:
@@ -14,6 +15,7 @@ class Grid:
         self.height = globals.HEIGHT
         
         self.array_of_cells = [] #holds all the cells
+        self.solved = False
 
         self.init_grid_array() 
     
@@ -59,8 +61,14 @@ class Grid:
                 self.array_of_cells[index].resize_cell(left, top, width, height, new_rect)
 
     def draw_9x9_board(self):
-        for cell in self.array_of_cells:
-            cell.draw_cell()
+        # then draw the cells
+        if globals.init_flag == False:
+            for cell in self.array_of_cells:
+                cell.draw_cell_init9x9()
+                globals.init_flag = True
+        elif globals.init_flag == True:
+            for cell in self.array_of_cells:
+                cell.draw_cell()
 
     def draw_line(self, the_color, x1, y1, x2, y2, width): 
         # need this to draw thicker lines between the 9 3x3 boxes
@@ -116,12 +124,13 @@ class Grid:
                 sum += self.array_of_cells[index_].number # to access every cell, every cell should have indexes going 1-9 left to right, top to bottom, cells.index(cell)
     
     def check_solution(self):
-        correct = 0
-        for cell in self.array_of_cells:
-            if cell.number == cell.correct_number:
-                correct += 1
-            if correct == 81:
-                print("You won! Congratulations!")
+        if self.solved:
+            return
+
+        if all(cell.number != 0 and cell.number == cell.correct_number for cell in self.array_of_cells):
+            self.solved = True
+            print("You won! Congratulations!!")
+        
 
     def _createsolution(self, board):
         for i in range (9): 
@@ -133,7 +142,12 @@ class Grid:
         # generate grid (like easygrid1) wo solutions on board
         for i in range(9):
             for j in range(9):
-                globals.cell_grid[i][j].number = board[i][j]
+                cell = globals.cell_grid[i][j]
+                if cell.position in globals.random_cells:
+                    cell.number = 0
+                    cell.filled = False
+                else:
+                    cell.number = board[i][j]
         for cell in globals.grid.array_of_cells:
             if cell.number != 0:
                 cell.change_cell(color=WHITE, num=cell.number)
@@ -145,17 +159,21 @@ class Grid:
         print(f"x: {x}, y: {y}")
     
     def print_grid_array(self):
-        i = 0
-        for cell in self.array_of_cells:
-            if i < 8:
-                if cell.position < 10:
-                    print(cell.position, end = "  ")
-                else:
-                    print(cell.position, end = " ")
-                i += 1
-            else:
-                print(cell.position, end = " ")
-                print()
-                i = 0
+        cells_by_row = sorted(self.array_of_cells, key=lambda cell: (cell.top, cell.left))
+
+        for row in range(9):
+            start = row * 9
+            end = start + 9
+            print(" ".join(f"{cell.position:2}" for cell in cells_by_row[start:end]))
+    
+    def print_answer(self):
+        print()
+        print()
+        cells_by_row = sorted(self.array_of_cells, key=lambda cell: (cell.top, cell.left))
+
+        for row in range(9):
+            start = row * 9
+            end = start + 9
+            print(" ".join(str(cell.correct_number) for cell in cells_by_row[start:end]))
         
     

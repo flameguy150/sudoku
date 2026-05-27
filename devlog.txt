@@ -11,9 +11,23 @@ Number input controls
 Setting hud overlay
 font resize
 setting hud overlay - options displayed
----------------------------------------------------------------
+-----------------------------------------------------v----------
 
 AUG26_2025... its like 1 am... cant sleep ---------------------
 Players cant click on stuff during settings hud overlay
 animated flwer, organized game loop
 ---------------------------------------------------------------
+
+27MAY2026... Im back in Hawaii --------------------------------
+What a year it's been
+I'm back to coding
+- [ ] players can click on screen 
+- [X] players can insert numbers
+- [X] hidden cells to create puzzle instead of just board solution
+- [X] fixed ending so board correctly identifies when game is completed
+
+OK honestly after coming back almost a year later, I'm proud of all the work I did. My codebase was somewhat easy enough to understand and the comments helped a lot, although I wish I would've been more thorough to save time. It's been fun coming back to this project.
+
+TODO / Issues:
+- Board is not generating correct solutions
+- Settings is not done, clear function clears board

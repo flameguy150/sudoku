@@ -21,6 +21,7 @@ from src.neo.core.grid import Grid
 from src.neo.utils.utilities import resource_path, mute_music, display_w_h, resize_font
 from src.neo.ui.flower import Flower
 from src.neo.core.board import _board
+import random
 
 pygame.init()
 
@@ -67,23 +68,51 @@ game.run()
 #Init grid here
 globals.grid = Grid() 
 
+
+# INIT THE RANDOM CELLS TO BE DRAWN HERE
+# --------------------------------
+# depending on settings, we can make change how many cells are drawn
+# 81 * .3 = 24.3 = 24 (EASY) 57
+# 81 * .4 = 32.4 = 32 (MEDIUM) 49
+# 81 * .5 = 40.5 = 41 (HARD) 40
+# depending on difficulty, i will set the number and decrement by 1 
+
+# (EASY) --------------------------------------------------------------------
+random_cells = [ ]
+# populate cell with 24 values
+for i in range(24):
+    random_cells.append(i)
+
+# add or subtract random amount for each value // maxed at 59
+for i in range(len(random_cells)):
+    x = random.randint(0,58) # random value to add
+    random_cells[i] += x
+
+# now we insert the randomized cells to be skipped in the drawing process into our global variable to be used in the cell.py file   
+globals.random_cells = random_cells
+# --------------------------------
+
+
+
 # we init cell grid in order to store cells
-globals.cell_grid = [[globals.grid.array_of_cells[0] ,globals.grid.array_of_cells[1], globals.grid.array_of_cells[2], globals.grid.array_of_cells[27], globals.grid.array_of_cells[28], globals.grid.array_of_cells[29], globals.grid.      array_of_cells[54], globals.grid.array_of_cells[55], globals.grid.array_of_cells[56]],
-			 [globals.grid.array_of_cells[3], globals.grid.array_of_cells[4], globals.grid.array_of_cells[5], globals.grid.array_of_cells[30] ,globals.grid.array_of_cells[31], globals.grid.array_of_cells[32], globals.grid.array_of_cells[57], globals.grid.array_of_cells[58], globals.grid.array_of_cells[59]],
-			 [globals.grid.array_of_cells[6], globals.grid.array_of_cells[7], globals.grid.array_of_cells[8], globals.grid.array_of_cells[33], globals.grid.array_of_cells[34], globals.grid.array_of_cells[35], globals.grid.array_of_cells[60], globals.grid.array_of_cells[61], globals.grid.array_of_cells[62]],
-			 [globals.grid.array_of_cells[9], globals.grid.array_of_cells[10], globals.grid.array_of_cells[11], globals.grid.array_of_cells[36], globals.grid.array_of_cells[37], globals.grid.array_of_cells[38], globals.grid.array_of_cells[63 ], globals.grid.array_of_cells[64], globals.grid.array_of_cells[65]],
-			 [globals.grid.array_of_cells[12],globals.grid.array_of_cells[13], globals.grid.array_of_cells[14], globals.grid.array_of_cells[39], globals.grid.array_of_cells[40], globals.grid.array_of_cells[41], globals.grid.array_of_cells[66], globals.grid.array_of_cells[67], globals.grid.array_of_cells[68]],
-			 [globals.grid.array_of_cells[15],globals.grid.array_of_cells[16], globals.grid.array_of_cells[17], globals.grid.array_of_cells[42], globals.grid.array_of_cells[43], globals.grid.array_of_cells[44], globals.grid.array_of_cells[69], globals.grid.array_of_cells[70], globals.grid.array_of_cells[71]],
-			 [globals.grid.array_of_cells[18],globals.grid.array_of_cells[19], globals.grid.array_of_cells[20], globals.grid.array_of_cells[45], globals.grid.array_of_cells[46], globals.grid.array_of_cells[47], globals.grid.array_of_cells[72], globals.grid.array_of_cells[73], globals.grid.array_of_cells[74]],
-			 [globals.grid.array_of_cells[21],globals.grid.array_of_cells[22], globals.grid.array_of_cells[23], globals.grid.array_of_cells[48], globals.grid.array_of_cells[49], globals.grid.array_of_cells[50], globals.grid.array_of_cells[75], globals.grid.array_of_cells[76], globals.grid.array_of_cells[77]],
-			 [globals.grid.array_of_cells[24],globals.grid.array_of_cells[25], globals.grid.array_of_cells[26], globals.grid.array_of_cells[51], globals.grid.array_of_cells[52], globals.grid.array_of_cells[53], globals.grid.array_of_cells[78], globals.grid.array_of_cells[79], globals.grid.array_of_cells[80]]
-			 ]
+globals.cell_grid = [
+    [globals.grid.array_of_cells[0] ,globals.grid.array_of_cells[1], globals.grid.array_of_cells[2], globals.grid.array_of_cells[27], globals.grid.array_of_cells[28], globals.grid.array_of_cells[29], globals.grid.array_of_cells[54], globals.grid.array_of_cells[55], globals.grid.array_of_cells[56]],
+	[globals.grid.array_of_cells[3], globals.grid.array_of_cells[4], globals.grid.array_of_cells[5], globals.grid.array_of_cells[30] ,globals.grid.array_of_cells[31], globals.grid.array_of_cells[32], globals.grid.array_of_cells[57], globals.grid.array_of_cells[58], globals.grid.array_of_cells[59]],
+	[globals.grid.array_of_cells[6], globals.grid.array_of_cells[7], globals.grid.array_of_cells[8], globals.grid.array_of_cells[33], globals.grid.array_of_cells[34], globals.grid.array_of_cells[35], globals.grid.array_of_cells[60], globals.grid.array_of_cells[61], globals.grid.array_of_cells[62]],
+	[globals.grid.array_of_cells[9], globals.grid.array_of_cells[10], globals.grid.array_of_cells[11], globals.grid.array_of_cells[36], globals.grid.array_of_cells[37], globals.grid.array_of_cells[38], globals.grid.array_of_cells[63 ], globals.grid.array_of_cells[64], globals.grid.array_of_cells[65]],
+	[globals.grid.array_of_cells[12],globals.grid.array_of_cells[13], globals.grid.array_of_cells[14], globals.grid.array_of_cells[39], globals.grid.array_of_cells[40], globals.grid.array_of_cells[41], globals.grid.array_of_cells[66], globals.grid.array_of_cells[67], globals.grid.array_of_cells[68]],
+	[globals.grid.array_of_cells[15],globals.grid.array_of_cells[16], globals.grid.array_of_cells[17], globals.grid.array_of_cells[42], globals.grid.array_of_cells[43], globals.grid.array_of_cells[44], globals.grid.array_of_cells[69], globals.grid.array_of_cells[70], globals.grid.array_of_cells[71]],
+	[globals.grid.array_of_cells[18],globals.grid.array_of_cells[19], globals.grid.array_of_cells[20], globals.grid.array_of_cells[45], globals.grid.array_of_cells[46], globals.grid.array_of_cells[47], globals.grid.array_of_cells[72], globals.grid.array_of_cells[73], globals.grid.array_of_cells[74]],
+	[globals.grid.array_of_cells[21],globals.grid.array_of_cells[22], globals.grid.array_of_cells[23], globals.grid.array_of_cells[48], globals.grid.array_of_cells[49], globals.grid.array_of_cells[50], globals.grid.array_of_cells[75], globals.grid.array_of_cells[76], globals.grid.array_of_cells[77]],
+	[globals.grid.array_of_cells[24],globals.grid.array_of_cells[25], globals.grid.array_of_cells[26], globals.grid.array_of_cells[51], globals.grid.array_of_cells[52], globals.grid.array_of_cells[53], globals.grid.array_of_cells[78], globals.grid.array_of_cells[79], globals.grid.array_of_cells[80]]
+	]
 
 globals.board = _board()
 globals.grid._createsolution(globals.board)
 globals.grid.generate_board(globals.board)
 
 globals.grid.print_grid_array() #debug
+globals.grid.print_answer()
 while globals.running:
     # ----EVENT HANDLING--------------------------------------------------------
     for event in pygame.event.get():
@@ -97,6 +126,8 @@ while globals.running:
                      mute_music()
                 if event.key == pygame.K_f:
                       globals.screen_info = not globals.screen_info
+
+
         # FOR WINDOW RESIZE
         elif event.type == pygame.VIDEORESIZE:
                 # Update screen dimensions and recreate the display surface
