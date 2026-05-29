@@ -30,12 +30,19 @@ class Cell:
         self.correct_number = 0 # the correct number
 
     def init_rect(self):
-        '''This function exists so I can init rects for the cells, this is neccesary because we must generate the solution and board before actually running the game through game loop'''
+        '''
+        This function exists so I can init rects for the cells, this is neccesary because we must generate the solution and board before actually running the game through game loop.
+
+        It is used when creating cells in grid.py. 
+        I could probably just call it during the initialization of the cell but I'm too lazy and it seems minuscule
+        '''
         cell_rect = pygame.draw.rect(globals.screen, self.color, pygame.Rect(self.left, self.top, self.width, self.height))
         self.rect = cell_rect
 
     def draw_cell_init9x9(self):
-        """This function exists so that when the initial board is drawn, the if statements in the bottom do not bother the rest of the drawing functions"""
+        """
+        This function exists so that when the initial board is drawn, the if statements in the bottom do not bother the rest of the drawing functions
+        """
         cell_outline = pygame.draw.rect(globals.screen, BLACK, pygame.Rect(self.left - 1, self.top - 1, self.width + 2, self.height + 2))
         cell_rect = pygame.draw.rect(globals.screen, self.color, pygame.Rect(self.left, self.top, self.width, self.height))
         self.rect = cell_rect

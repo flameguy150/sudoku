@@ -23,7 +23,7 @@ pyinstaller --onefile main.py
             - need to make grid a global variable
     - [X] center number in cell
     - [X] Do not let players change number if correct num is already present
-- [ ] game logic
+- [X] game logic                        -----May28 2026-----
     - [X] generating sudoku board
         - [X] have cells hold correct num
         - [X] generate a valid board
@@ -47,8 +47,13 @@ pyinstaller --onefile main.py
     - [X] animated flower
 
 - [ ] Game over screen when game is won
+    - [X] Winner screen appears
+    - [X] Have the puzzle redone
 
 
+- [ ] Difficulty Settings
+    - [X] Make Difficulty
+    - [ ] Be able to change difficulty
 
 
 

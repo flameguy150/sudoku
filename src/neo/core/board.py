@@ -1,8 +1,17 @@
 import pygame
 import random
 
+
+"""
+This file creates the solved 2d array that will be imported to the other files.
+The other files will use this solution to create the board and display the puzzle.
+grids.py will make the puzzle by hiding 30-50% of the cells, depending on the difficulty setting.    
+"""
+
+
 def is_valid(board, row, column, num): #boolean function that returns true if is valid
-    """first, need to identify which cell the num is located on the grid
+    """
+    first, need to identify which cell the num is located on the grid
     then, check if the number already exists within that cell
     then check if number exists in the row and column
     """
@@ -31,7 +40,12 @@ def is_valid(board, row, column, num): #boolean function that returns true if is
     return True
 
 
-def create_puzzle(board): #recursive backtracking algorithm
+def create_puzzle(board):
+
+    """
+    Recursive backtracking algorithm using DFS
+    """
+
     numbers = list(range(1,10)) #list of numbers from 1 - 10
     for row in range(9):
         random.shuffle(numbers)
@@ -75,5 +89,4 @@ def _board():
     create_puzzle(board)
     
     # printboard(board)
-    print(board)
     return board

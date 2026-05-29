@@ -18,7 +18,7 @@ from src.neo.config.constants import WHITE, BLACK, FPS
 from src.neo.config import globals
 from src.neo.ui.gameState import gameStateManager
 from src.neo.core.grid import Grid
-from src.neo.utils.utilities import resource_path, mute_music, display_w_h, resize_font
+from src.neo.utils.utilities import resource_path, mute_music, display_w_h, resize_font, remake_puzzle, hide_cells
 from src.neo.ui.flower import Flower
 from src.neo.core.board import _board
 import random
@@ -68,9 +68,11 @@ globals.cf_small = pygame.font.Font('assets/fonts/JetBrainsMonoNerdFont-ExtraLig
 # Game loop--------------------------------------------------------------------
 globals.running = True
 globals.screen.fill(BLACK)  # Fill the background with black
+
 game = gameStateManager()
 #runs and loads up main menu
 game.run() 
+
 #Init grid here
 globals.grid = Grid() 
 
@@ -84,18 +86,12 @@ globals.grid = Grid()
 # depending on difficulty, i will set the number and decrement by 1 
 
 # (EASY) --------------------------------------------------------------------
-random_cells = [ ]
-# populate cell with 24 values
-for i in range(24):
-    random_cells.append(i)
+"""
+depending on "easy", "medium", or "hard", it will determine how many of the cells are covered
+"""
 
-# add or subtract random amount for each value // maxed at 59
-for i in range(len(random_cells)):
-    x = random.randint(0,58) # random value to add
-    random_cells[i] += x
-
-# now we insert the randomized cells to be skipped in the drawing process into our global variable to be used in the cell.py file   
-globals.random_cells = random_cells
+difficulty = "easy" 
+hide_cells(difficulty)
 # --------------------------------
 
 
@@ -109,12 +105,8 @@ for i in range(9):
             globals.cell_grid[i][j] = globals.grid.array_of_cells[index]
 
 
-#generate solution through array
-globals.board = _board() 
-#then put that solution in globals.board and then generate the baord using the solution
-#keeping some cells hidden 
-globals.grid._createsolution(globals.board)
-globals.grid.generate_board(globals.board)
+#remake_puzzle() generates the solution and the puzzle. It is called remake_puzzle because it will be used again if the player wants to start a new game after winning
+remake_puzzle()
 
 globals.grid.print_grid_array() #debug
 globals.grid.print_answer()
@@ -146,6 +138,9 @@ while globals.running:
         globals.grid.check_solution()
                 
         game.get_input(event)
+    
+
+
     game.run()
     if globals.screen_info == True:
             display_w_h() #display width and height in top left corner

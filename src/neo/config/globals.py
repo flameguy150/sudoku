@@ -24,6 +24,7 @@ SUDOKU_DJ = None
 #event
 curr_event = None
 screen_info = True
+game_is_finished = False # boolean flag to indicate when game is done
 
 #controls
 holding_num = 1
@@ -51,3 +52,5 @@ mistakes = 0
 # total time spent on game and time spent on the current puzzle
 total_time = 0 # would have to access this through a txt file
 current_time = 0 # would have to access this through a txt file
+
+

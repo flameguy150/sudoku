@@ -1,8 +1,11 @@
 '''for music'''
 import os
 import sys
+import random
 from src.neo.config import globals
+from src.neo.core.board import _board
 import pygame
+
 
 
 def resource_path(relative_path):
@@ -38,3 +41,43 @@ def resize_font():
 
     globals.custom_font = pygame.font.Font('assets/fonts/JetBrainsMonoNerdFont-ExtraLightItalic.ttf', normal)
     globals.cf_small = pygame.font.Font('assets/fonts/JetBrainsMonoNerdFont-ExtraLightItalic.ttf', small)
+
+def remake_puzzle():
+    """
+    generate new puzzle for new game here
+    """
+        
+    #generate solution through array
+    globals.board = _board() 
+    #then put that solution in globals.board and then generate the baord using the solution
+    #keeping some cells hidden 
+    globals.grid._createsolution(globals.board)
+    globals.grid.generate_board(globals.board)
+
+def hide_cells(diff):
+    random_cells = [ ]
+    n = 0
+    if diff == "easy":
+        n = 24
+
+    elif diff == "medium":
+        n = 32
+
+    elif diff == "hard":
+        n = 40
+
+    index = 82 - n
+
+    # populate cell with n values
+    for i in range(n):
+        random_cells.append(i)
+
+    # add or subtract random amount for each value // maxed at 59
+    for i in range(len(random_cells)):
+        x = random.randint(0, 82-n) # random value to add
+        random_cells[i] += x
+
+        
+    # now we insert the randomized cells to be skipped in the drawing process into our global variable to be used in the cell.py file  
+ 
+    globals.random_cells = random_cells

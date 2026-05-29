@@ -9,6 +9,17 @@ TITLE_MENU_BG = (234, 212, 252)
 GAME_BG = (234, 212, 252)
 
 
+
+GAME_BG_2 = (234, 212, 252)
+
+rr = 0
+gg = 0
+bb = 0
+
+dr = 1
+dg = 2
+db = 3
+
 #Game
 FPS = 60
 

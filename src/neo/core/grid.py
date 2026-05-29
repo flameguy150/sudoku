@@ -124,11 +124,16 @@ class Grid:
                 sum += self.array_of_cells[index_].number # to access every cell, every cell should have indexes going 1-9 left to right, top to bottom, cells.index(cell)
     
     def check_solution(self):
-        if self.solved:
-            return
-        if all(cell.number != 0 and cell.number == cell.correct_number for cell in self.array_of_cells):
-            self.solved = True
+        """
+        Basically, if you win the game and game is not finished
+        - It will activate the game is finished global boolean flag
+        - This will trigger it to go to the endings screen
+        """
+        if all(cell.number != 0 and cell.number == cell.correct_number for cell in self.array_of_cells) and globals.game_is_finished == False:
             print("You won! Congratulations!!")
+
+            # if game is won, change to ending screen using global flag
+            globals.game_is_finished = True
         
 
     def _createsolution(self, board):
@@ -136,8 +141,8 @@ class Grid:
             # go through every list, and sht
             for j in range(9):
                 globals.cell_grid[i][j].correct_number = board[i][j]
-                print("globals cell grid")
-                print(globals.cell_grid)
+                # print("globals cell grid")
+                # print(globals.cell_grid)
     
     def generate_board(self, board): 
         # generate grid (like easygrid1) wo solutions on board

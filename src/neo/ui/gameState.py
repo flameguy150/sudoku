@@ -1,9 +1,9 @@
 import pygame
 from src.neo.config import globals
-from src.neo.config.constants import RED, TITLE_MENU_BG, GAME_BG, WHITE, BLACK, BLUE, GREEN
+from src.neo.config.constants import RED, TITLE_MENU_BG, GAME_BG, WHITE, BLACK, BLUE, GREEN, rr, gg, bb, dr, dg, db
 from src.neo.ui.flower import Flower
 from src.neo.core.board import _board
-
+from src.neo.utils.utilities import remake_puzzle
 '''
 ------------------------   GAME STATE MANAGER  ------------------------   ------------------------   ------------------------   
 '''
@@ -19,7 +19,16 @@ class gameStateManager:
         self.settings_event = None 
 
     def get_input(self, event):
-        '''pass in input to see where to go'''
+        '''
+        pass in input to see where to go
+
+        currently:
+        - menu
+        - ingame
+        - settings
+        - ending screen
+        
+        '''
 
         #if in main menu
         if self.state == "menu":
@@ -80,7 +89,25 @@ class gameStateManager:
                         globals.settings_on = False
                 elif event.key == pygame.K_c:
                     globals.grid.clear()
+
+        #if in ending screen
+        elif self.state == "ending":
+            # if you press on the ending screen with mouse, it goes to title screen
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    remake_puzzle()
+                    self.state = "menu"
+                    globals.game_is_finished = False
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                remake_puzzle()
+                self.state = "menu"
+                globals.game_is_finished = False
+
     def run(self):
+        """
+        # Menu_Level()
+        # Game_Level(self.event)
+        """
         if self.state == "menu":
             # Menu_Level()
             self.main_menu()
@@ -89,6 +116,9 @@ class gameStateManager:
             self.in_game_screen()
         elif self.state == "settings":
             self.settings(self.settings_event)
+        elif self.state == "ending":
+            self.ending()
+
     
     def main_menu(self):
         globals.screen.fill(TITLE_MENU_BG)
@@ -98,6 +128,7 @@ class gameStateManager:
         # draw text
         globals.screen.blit(custom_text, (globals.WIDTH // 2 - custom_text.get_width() // 2, 100)) # Center the text horizontally
         globals.screen.blit(MSG, (globals.WIDTH // 2 - MSG.get_width() // 2, 200)) # Center the text horizontally\
+
         #animate flower sprite
         globals.flower.update()
         globals.flower.draw(globals.screen)
@@ -105,8 +136,36 @@ class gameStateManager:
         
 
     def in_game_screen(self):
-        globals.screen.fill(GAME_BG)
+        """ 
+        in game screen
+        highlighted part is for rgb background
 
+        first, if game is won, change it immediately 
+        """
+        if globals.game_is_finished == True:
+            self.state = "ending"
+            return
+        # global rr, gg, bb, dr, dg, db
+
+        
+        # rr += dr
+        # gg += dg
+        # bb += db
+
+        # if rr >= 255 or rr <= 0:
+        #     dr = -dr
+        #     rr += dr
+        # if gg >= 255 or gg <= 0:
+        #     dg = -dg
+        #     gg += dg
+        # if bb >= 255 or bb <= 0:
+        #     db = -db
+        #     bb += db
+
+        # game_background_color = (rr, gg, bb)
+        # globals.screen.fill(game_background_color)
+
+        globals.screen.fill(GAME_BG)
         globals.grid.draw_9x9_board()
 
         # grid.get_mouse_pos()
@@ -116,7 +175,7 @@ class gameStateManager:
             cell.insert_number(globals.curr_event)
             
         
-        globals.grid.draw_grid_outlines() 
+        globals.grid.draw_grid_outlines()  
 
 
 
@@ -167,7 +226,21 @@ class gameStateManager:
           
 
 
+    def ending(self):
 
+        """
+        When player defeats the puzzle, the ingame screen will take them to the winner_screen.
+        They are taken to the title screen and the puzzle gets remade.
+        """
+
+        globals.screen.fill(GAME_BG)
+
+        custom_text = globals.custom_font.render("You defeated the game!", True, (140, 37, 150)) # Green text
+        MSG = globals.custom_font.render("Press Enter to go the title menu", True, (100, 137, 150)) # Green text
+
+        # draw text
+        globals.screen.blit(custom_text, (globals.WIDTH // 2 - custom_text.get_width() // 2, 100)) # Center the text horizontally
+        globals.screen.blit(MSG, (globals.WIDTH // 2 - MSG.get_width() // 2, 200)) # Center the text horizontally
 
 
 

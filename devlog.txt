@@ -36,3 +36,21 @@ TODO / Issues:
 
 28MAY2026... Back at it --------------------------------
 - [X] Fixed puzzle generation, issue was in how the solved 2d array was getting translated onto the board
+
+I want to add savestates and also make a typing screen where users can ask for help
+
+ive also been messing with the rgb rainbow background settings lol
+
+- save states for current game (so player can exit app and continue later)
+- save info like time spent on game, time spent on current puzzle, and total wins and total mistakes
+- ai help with current puzzle
+- mitake counter
+-  [X] Winner Screen
+
+
+
+ISSUES:
+- music gets kinda choppy when screen is too big
+
+
+I got the winner screen to work and refactored a lot of useful functions in the main file into utilities so I can reuse them. The codebase is a little bit cleaner.
