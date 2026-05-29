@@ -52,9 +52,15 @@ globals.SUDOKU_DJ.play(-1, 0.0)
 clock = pygame.time.Clock()
 normal = globals.WIDTH//25
 small = globals.WIDTH//30
-globals.font_number_size = pygame.font.Font('assets/fonts/FSEX300.TTF', normal)
-globals.custom_font = pygame.font.Font('assets/fonts/FSEX300.TTF', normal)
-globals.cf_small = pygame.font.Font('assets/fonts/FSEX300.TTF', small)
+
+
+# globals.font_number_size = pygame.font.Font('assets/fonts/FSEX300.TTF', normal)
+# globals.custom_font = pygame.font.Font('assets/fonts/FSEX300.TTF', normal)
+# globals.cf_small = pygame.font.Font('assets/fonts/FSEX300.TTF', small)
+
+
+globals.custom_font = pygame.font.Font('assets/fonts/JetBrainsMonoNerdFont-ExtraLightItalic.ttf', normal)
+globals.cf_small = pygame.font.Font('assets/fonts/JetBrainsMonoNerdFont-ExtraLightItalic.ttf', small)
 
 
 
@@ -95,19 +101,18 @@ globals.random_cells = random_cells
 
 
 # we init cell grid in order to store cells
-globals.cell_grid = [
-    [globals.grid.array_of_cells[0] ,globals.grid.array_of_cells[1], globals.grid.array_of_cells[2], globals.grid.array_of_cells[27], globals.grid.array_of_cells[28], globals.grid.array_of_cells[29], globals.grid.array_of_cells[54], globals.grid.array_of_cells[55], globals.grid.array_of_cells[56]],
-	[globals.grid.array_of_cells[3], globals.grid.array_of_cells[4], globals.grid.array_of_cells[5], globals.grid.array_of_cells[30] ,globals.grid.array_of_cells[31], globals.grid.array_of_cells[32], globals.grid.array_of_cells[57], globals.grid.array_of_cells[58], globals.grid.array_of_cells[59]],
-	[globals.grid.array_of_cells[6], globals.grid.array_of_cells[7], globals.grid.array_of_cells[8], globals.grid.array_of_cells[33], globals.grid.array_of_cells[34], globals.grid.array_of_cells[35], globals.grid.array_of_cells[60], globals.grid.array_of_cells[61], globals.grid.array_of_cells[62]],
-	[globals.grid.array_of_cells[9], globals.grid.array_of_cells[10], globals.grid.array_of_cells[11], globals.grid.array_of_cells[36], globals.grid.array_of_cells[37], globals.grid.array_of_cells[38], globals.grid.array_of_cells[63 ], globals.grid.array_of_cells[64], globals.grid.array_of_cells[65]],
-	[globals.grid.array_of_cells[12],globals.grid.array_of_cells[13], globals.grid.array_of_cells[14], globals.grid.array_of_cells[39], globals.grid.array_of_cells[40], globals.grid.array_of_cells[41], globals.grid.array_of_cells[66], globals.grid.array_of_cells[67], globals.grid.array_of_cells[68]],
-	[globals.grid.array_of_cells[15],globals.grid.array_of_cells[16], globals.grid.array_of_cells[17], globals.grid.array_of_cells[42], globals.grid.array_of_cells[43], globals.grid.array_of_cells[44], globals.grid.array_of_cells[69], globals.grid.array_of_cells[70], globals.grid.array_of_cells[71]],
-	[globals.grid.array_of_cells[18],globals.grid.array_of_cells[19], globals.grid.array_of_cells[20], globals.grid.array_of_cells[45], globals.grid.array_of_cells[46], globals.grid.array_of_cells[47], globals.grid.array_of_cells[72], globals.grid.array_of_cells[73], globals.grid.array_of_cells[74]],
-	[globals.grid.array_of_cells[21],globals.grid.array_of_cells[22], globals.grid.array_of_cells[23], globals.grid.array_of_cells[48], globals.grid.array_of_cells[49], globals.grid.array_of_cells[50], globals.grid.array_of_cells[75], globals.grid.array_of_cells[76], globals.grid.array_of_cells[77]],
-	[globals.grid.array_of_cells[24],globals.grid.array_of_cells[25], globals.grid.array_of_cells[26], globals.grid.array_of_cells[51], globals.grid.array_of_cells[52], globals.grid.array_of_cells[53], globals.grid.array_of_cells[78], globals.grid.array_of_cells[79], globals.grid.array_of_cells[80]]
-	]
 
-globals.board = _board()
+globals.cell_grid = [[None for _ in range(9)] for _ in range(9)]
+for i in range(9):
+      for j in range(9):
+            index = i * 9 + j
+            globals.cell_grid[i][j] = globals.grid.array_of_cells[index]
+
+
+#generate solution through array
+globals.board = _board() 
+#then put that solution in globals.board and then generate the baord using the solution
+#keeping some cells hidden 
 globals.grid._createsolution(globals.board)
 globals.grid.generate_board(globals.board)
 

@@ -33,5 +33,8 @@ def display_w_h():
 def resize_font():
     normal = globals.WIDTH//25
     small = globals.WIDTH//30
-    globals.custom_font = pygame.font.Font('assets/fonts/FSEX300.TTF', normal)
-    globals.cf_small = pygame.font.Font('assets/fonts/FSEX300.TTF', small)
+    # globals.custom_font = pygame.font.Font('assets/fonts/FSEX300.TTF', normal)
+    # globals.cf_small = pygame.font.Font('assets/fonts/FSEX300.TTF', small)
+
+    globals.custom_font = pygame.font.Font('assets/fonts/JetBrainsMonoNerdFont-ExtraLightItalic.ttf', normal)
+    globals.cf_small = pygame.font.Font('assets/fonts/JetBrainsMonoNerdFont-ExtraLightItalic.ttf', small)

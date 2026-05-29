@@ -44,3 +44,10 @@ init_flag = False #this to stop redrawing the beginning board everytime
 
 # number of correctly filled cells
 current_correct_cells = 0
+
+#holds how many mistakes player made
+mistakes = 0
+
+# total time spent on game and time spent on the current puzzle
+total_time = 0 # would have to access this through a txt file
+current_time = 0 # would have to access this through a txt file

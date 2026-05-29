@@ -21,7 +21,7 @@ animated flwer, organized game loop
 27MAY2026... Im back in Hawaii --------------------------------
 What a year it's been
 I'm back to coding
-- [ ] players can click on screen 
+- [X] players can click on screen 
 - [X] players can insert numbers
 - [X] hidden cells to create puzzle instead of just board solution
 - [X] fixed ending so board correctly identifies when game is completed
@@ -31,3 +31,8 @@ OK honestly after coming back almost a year later, I'm proud of all the work I d
 TODO / Issues:
 - Board is not generating correct solutions
 - Settings is not done, clear function clears board
+
+
+
+28MAY2026... Back at it --------------------------------
+- [X] Fixed puzzle generation, issue was in how the solved 2d array was getting translated onto the board

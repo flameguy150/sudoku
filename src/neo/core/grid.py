@@ -126,7 +126,6 @@ class Grid:
     def check_solution(self):
         if self.solved:
             return
-
         if all(cell.number != 0 and cell.number == cell.correct_number for cell in self.array_of_cells):
             self.solved = True
             print("You won! Congratulations!!")
@@ -137,6 +136,8 @@ class Grid:
             # go through every list, and sht
             for j in range(9):
                 globals.cell_grid[i][j].correct_number = board[i][j]
+                print("globals cell grid")
+                print(globals.cell_grid)
     
     def generate_board(self, board): 
         # generate grid (like easygrid1) wo solutions on board

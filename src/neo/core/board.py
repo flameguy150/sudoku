@@ -10,6 +10,7 @@ def is_valid(board, row, column, num): #boolean function that returns true if is
     start_row = row//3 * 3
     start_col = column//3 * 3
     
+    #check diagonals
     for x in range(3):
         for y in range(3):
             if board[start_row + x][start_col + y] == num:
@@ -66,11 +67,13 @@ def printboard(board):
     print(string)
     
 def _board():
+    #solution generator to pass on into globals.grid to make it appear on screen
     board = [[0] * 9 for _ in range(9)]
 
-    board[0][0] = random.randint(0,9) #so the puzzle is different every time
+    board[0][0] = random.randint(1,9) #so the puzzle is different every time
 
     create_puzzle(board)
     
     # printboard(board)
+    print(board)
     return board

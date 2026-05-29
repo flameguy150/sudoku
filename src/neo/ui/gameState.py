@@ -124,7 +124,8 @@ class gameStateManager:
           """
           curr state is self.settings_event
           settings:
-            restart
+            restart (redo init board)
+            change font ()
             Go home (saves game)
           """
           if curr_state == "menu":
@@ -132,9 +133,9 @@ class gameStateManager:
           elif curr_state == "game":
               self.in_game_screen()
 
-          box_width = 10*(globals.WIDTH/12)
-          box_height = 10*(globals.HEIGHT/12)
-          alpha_value = 170  # 50% transparency
+          box_width = 10*(globals.WIDTH)
+          box_height = 10*(globals.HEIGHT)
+          alpha_value = 190  # 50% transparency
           box_color = (0, 0, 0, alpha_value) # Red with alpha
 
           translucent_surface = pygame.Surface((box_width, box_height), pygame.SRCALPHA)
