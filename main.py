@@ -12,16 +12,14 @@ GLOBAL VARIABLES IN src.neo.config
 import pygame
 from pygame import mixer
 import os
-import sys
-import time
 from src.neo.config.constants import WHITE, BLACK, FPS
 from src.neo.config import globals
 from src.neo.ui.gameState import gameStateManager
 from src.neo.core.grid import Grid
 from src.neo.utils.utilities import resource_path, mute_music, display_w_h, resize_font, remake_puzzle, hide_cells
+from src.neo.utils.timer import Timer
 from src.neo.ui.flower import Flower
-from src.neo.core.board import _board
-import random
+
 
 pygame.init()
 
@@ -46,7 +44,7 @@ globals.SUDOKU_DJ = mixer.music
 
 # Configure and play music
 globals.SUDOKU_DJ.load(song) 
-globals.SUDOKU_DJ.set_volume(0.7) 
+globals.SUDOKU_DJ.set_volume(globals.volume) 
 globals.SUDOKU_DJ.play(-1, 0.0) 
 #----INIT--------------------------------------------------------------------
 clock = pygame.time.Clock()
@@ -111,6 +109,8 @@ remake_puzzle()
 globals.grid.print_grid_array() #debug
 globals.grid.print_answer()
 while globals.running:
+    globals.curr_event = None
+
     # ----EVENT HANDLING--------------------------------------------------------
     for event in pygame.event.get():
         globals.curr_event = event

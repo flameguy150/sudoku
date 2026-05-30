@@ -88,6 +88,8 @@ class Cell:
                 print("cell already filled")
             elif globals.holding_num != self.correct_number:
                 print("incorrect!")
+                globals.mistakes += 1
+                print(globals.mistakes)
             else:
                 self.change_cell(WHITE, globals.holding_num)
                 print("correct!")

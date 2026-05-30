@@ -46,7 +46,7 @@ pyinstaller --onefile main.py
 - [X] animations
     - [X] animated flower
 
-- [ ] Game over screen when game is won
+- [X] Game over screen when game is won
     - [X] Winner screen appears
     - [X] Have the puzzle redone
 
@@ -55,5 +55,8 @@ pyinstaller --onefile main.py
     - [X] Make Difficulty
     - [ ] Be able to change difficulty
 
+- [ ] Display mistakes in corner
+- [X] Display time in corner (add animation)
 
-
+- [ ] Save state
+    - [ ] Save mistakes in txt file "info.txt"

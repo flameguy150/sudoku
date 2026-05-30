@@ -3,15 +3,22 @@ from src.neo.config import globals
 from src.neo.config.constants import RED, TITLE_MENU_BG, GAME_BG, WHITE, BLACK, BLUE, GREEN, rr, gg, bb, dr, dg, db
 from src.neo.ui.flower import Flower
 from src.neo.core.board import _board
-from src.neo.utils.utilities import remake_puzzle
+from src.neo.utils.utilities import remake_puzzle, start_time, stop_time, display_time, display_mistakes
+from src.neo.utils.timer import Timer
 '''
 ------------------------   GAME STATE MANAGER  ------------------------   ------------------------   ------------------------   
 '''
 
 class gameStateManager:
+    """
+    This class basically stores all the levels of the game.
+    In this space, I code all the controls and inputs of each level,
+    as well as the animations and displays for each level.
+    """
     def __init__(self):
 
         self.state = "menu"
+        globals.timer_ = Timer()
 
         self.event = None
 
@@ -44,18 +51,24 @@ class gameStateManager:
                 #if main menu and press play
                 elif event.key == pygame.K_RETURN:
                     self.state = "game"
+                    # globals.timer_.reset()
+                    start_time()
             # if you press on the title screen with mouse, it enters game
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 self.state = "game"
+                # globals.timer_.reset()
+                start_time()
                 
         #if in game
         elif self.state == "game":
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
+                    stop_time()
                     self.state = "menu"
 
                 #if user accesses settings
                 elif event.key == pygame.K_s:
+                    stop_time()
                     self.settings_event = "game"
                     self.state = "settings"
                     # this is so players cannot click and insert numbers while in settings or enter game
@@ -86,6 +99,7 @@ class gameStateManager:
                         globals.settings_on = False
                     elif self.settings_event == "game":
                         self.state = "game"
+                        start_time()
                         globals.settings_on = False
                 elif event.key == pygame.K_c:
                     globals.grid.clear()
@@ -144,38 +158,24 @@ class gameStateManager:
         """
         if globals.game_is_finished == True:
             self.state = "ending"
+            #stop the timer
+            stop_time()
             return
-        # global rr, gg, bb, dr, dg, db
-
-        
-        # rr += dr
-        # gg += dg
-        # bb += db
-
-        # if rr >= 255 or rr <= 0:
-        #     dr = -dr
-        #     rr += dr
-        # if gg >= 255 or gg <= 0:
-        #     dg = -dg
-        #     gg += dg
-        # if bb >= 255 or bb <= 0:
-        #     db = -db
-        #     bb += db
-
-        # game_background_color = (rr, gg, bb)
-        # globals.screen.fill(game_background_color)
 
         globals.screen.fill(GAME_BG)
         globals.grid.draw_9x9_board()
 
         # grid.get_mouse_pos()
 
-        for cell in globals.grid.array_of_cells:
-            cell.highlight(globals.curr_event)
-            cell.insert_number(globals.curr_event)
+        if globals.curr_event is not None:
+            for cell in globals.grid.array_of_cells:
+                cell.highlight(globals.curr_event)
+                cell.insert_number(globals.curr_event)
             
         
-        globals.grid.draw_grid_outlines()  
+        globals.grid.draw_grid_outlines()
+        display_time()
+        display_mistakes()
 
 
 
