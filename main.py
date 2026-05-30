@@ -88,8 +88,7 @@ globals.grid = Grid()
 depending on "easy", "medium", or "hard", it will determine how many of the cells are covered
 """
 
-difficulty = "easy" 
-hide_cells(difficulty)
+globals.difficulty = "easy" 
 # --------------------------------
 
 

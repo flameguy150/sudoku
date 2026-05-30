@@ -32,6 +32,7 @@ holding_num = 1
 
 #settings
 settings_on = False
+difficulty = None
 
 #flower
 flower = None

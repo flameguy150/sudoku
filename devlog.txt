@@ -54,3 +54,17 @@ ISSUES:
 
 
 I got the winner screen to work and refactored a lot of useful functions in the main file into utilities so I can reuse them. The codebase is a little bit cleaner.
+----------------------------------------------------------------
+
+
+
+29MAY2026--------------------------------
+Did a lot of work, created loading and saving files
+
+also created display for mistakes and time
+
+starting to feel like a real game
+
+also tweaked little stuff from stuff I realized when i look over my code. One was how I was calling hide_cells() in the main file when I should call it in the remake_puzzle() function so that the random cells to hdie are different every new puzzle after the player keeps winning
+
+good sesh im so tired

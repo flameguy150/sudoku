@@ -92,6 +92,8 @@ def remake_puzzle():
     """
         
     #generate solution through array
+    hide_cells(globals.difficulty) #determines what cells to hide 
+    
     globals.board = _board() 
     #then put that solution in globals.board and then generate the baord using the solution
     #keeping some cells hidden 
@@ -126,7 +128,7 @@ def hide_cells(diff):
 
     # add or subtract random amount for each value // maxed at 59
     for i in range(len(random_cells)):
-        x = random.randint(0, 82-n) # random value to add
+        x = random.randint(0, index) # random value to add
         random_cells[i] += x
 
     # random_cells = [0, 1, 2, 3]  # THIS IS FOR DEBUGGING  
