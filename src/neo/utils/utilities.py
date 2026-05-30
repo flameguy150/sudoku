@@ -108,28 +108,28 @@ def hide_cells(diff):
         diff : difficulty setting (easy, medium, hard)
     """
     random_cells = [ ]
-    # n = 0
-    # if diff == "easy":
-    #     n = 24
+    n = 0
+    if diff == "easy":
+        n = 24
 
-    # elif diff == "medium":
-    #     n = 32
+    elif diff == "medium":
+        n = 32
 
-    # elif diff == "hard":
-    #     n = 40
+    elif diff == "hard":
+        n = 40
 
-    # index = 82 - n
+    index = 82 - n
 
-    # # populate cell with n values
-    # for i in range(n):
-    #     random_cells.append(i)
+    # populate cell with n values
+    for i in range(n):
+        random_cells.append(i)
 
-    # # add or subtract random amount for each value // maxed at 59
-    # for i in range(len(random_cells)):
-    #     x = random.randint(0, 82-n) # random value to add
-    #     random_cells[i] += x
+    # add or subtract random amount for each value // maxed at 59
+    for i in range(len(random_cells)):
+        x = random.randint(0, 82-n) # random value to add
+        random_cells[i] += x
 
-    random_cells = [0, 1, 2, 3]  # THIS IS FOR DEBUGGING  
+    # random_cells = [0, 1, 2, 3]  # THIS IS FOR DEBUGGING  
     # now we insert the randomized cells to be skipped in the drawing process into our global variable to be used in the cell.py file  
  
     globals.random_cells = random_cells
