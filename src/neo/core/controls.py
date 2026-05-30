@@ -10,7 +10,7 @@
 # press c to list all controls
 # press f for toggling screen width x height
 
-
+# press l to load saved game
 
 
 

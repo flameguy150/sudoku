@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import random
+import json
 from src.neo.config import globals
 from src.neo.core.board import _board
 
@@ -94,8 +95,9 @@ def remake_puzzle():
     globals.board = _board() 
     #then put that solution in globals.board and then generate the baord using the solution
     #keeping some cells hidden 
-    globals.grid._createsolution(globals.board)
-    globals.grid.generate_board(globals.board)
+    globals.grid._createsolution(globals.board) #loads numbers into 2d array
+    globals.grid.generate_board(globals.board) # this part draws the numbers
+
 
 def hide_cells(diff):
     """
@@ -127,7 +129,79 @@ def hide_cells(diff):
     #     x = random.randint(0, 82-n) # random value to add
     #     random_cells[i] += x
 
-    random_cells = [0]  # THIS IS FOR DEBUGGING  
+    random_cells = [0, 1, 2, 3]  # THIS IS FOR DEBUGGING  
     # now we insert the randomized cells to be skipped in the drawing process into our global variable to be used in the cell.py file  
  
     globals.random_cells = random_cells
+
+
+
+
+### ↓↓↓ SAVE STATES ↓↓↓ ###### ↓↓↓ SAVE STATES ↓↓↓ ###### ↓↓↓ SAVE STATES ↓↓↓ ### 
+
+def board_update():
+    """
+    Saves current board into global 2d array so that we can put it into save slots
+    """
+    pass
+
+def save_game():
+    """ 
+    saves current game when players want to exit.
+    this will be used to load game when player starts to run the app again.
+    """
+    file_path = "src/neo/utils/slot_1.txt"
+    
+    mistakes = f"{globals.mistakes}\n"
+
+    elapsed_seconds = 0
+    if globals.timer_ is not None:
+        elapsed_seconds = int(globals.timer_.elapsed())
+
+    minutes, seconds = divmod(elapsed_seconds, 60)
+    current_time = f"{minutes:02}:{seconds:02}\n"
+
+
+    with open(file_path, "r") as file:
+        lines = file.readlines()
+
+
+    board = []
+    for row in globals.cell_grid:
+        board.append([cell.number for cell in row])
+
+    board_lines = json.dumps(board, indent=2).splitlines(keepends=True)
+
+    lines[4] = current_time # replaces line 5
+    lines[5] = mistakes # replaces line 6
+    lines[8:] = board_lines # replaces saved board rows after line 8
+
+    with open(file_path, "w") as file:
+        file.writelines(lines)
+
+
+def load_game():
+    """
+    loads current save file
+    """
+
+    file_path = "src/neo/utils/slot_1.txt"
+
+    with open(file_path, "r") as file:
+        lines = file.readlines()
+
+    board_text = "".join(lines[8:])
+    loaded_board = json.loads(board_text)
+    for i in range(9):
+        for j in range(9):
+            index = i * 9 + j
+            # load saved progress, the board from last game
+            globals.cell_grid[i][j].number = loaded_board[i][j]
+    
+    #import time
+    saved_time = lines[4].strip()
+    minutes, seconds = saved_time.split(":")
+    globals.timer_.total_time = int(minutes) * 60 + int(seconds)
+
+    #import mistakes
+    globals.mistakes = int(lines[5].strip())

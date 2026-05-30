@@ -181,5 +181,16 @@ class Grid:
             start = row * 9
             end = start + 9
             print(" ".join(str(cell.correct_number) for cell in cells_by_row[start:end]))
+
+    def print_current_board(self):
+        print()
+        print()
+        cells_by_row = sorted(self.array_of_cells, key=lambda cell: (cell.top, cell.left))
+
+        for row in range(9):
+            start = row * 9
+            end = start + 9
+            print(" ".join(str(cell.number) for cell in cells_by_row[start:end]))
+        
         
     

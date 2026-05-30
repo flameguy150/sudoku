@@ -55,8 +55,14 @@ pyinstaller --onefile main.py
     - [X] Make Difficulty
     - [ ] Be able to change difficulty
 
-- [ ] Display mistakes in corner
+- [X] Display mistakes in corner
 - [X] Display time in corner (add animation)
 
-- [ ] Save state
-    - [ ] Save mistakes in txt file "info.txt"
+- [X] Save state
+    - [X] Save mistakes and time in txt file "slot_1.txt" when exiting game
+    - [ ] Save current board (in 2d array form) in info.txt.  
+        - [X] This will require building a global array to hold the current in-game board
+        - [X] Also requires to save the grid and all cells, so the new game can hold correct nums for each cell
+
+        
+Still need to add ui to load game

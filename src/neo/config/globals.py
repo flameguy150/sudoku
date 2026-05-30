@@ -37,7 +37,7 @@ settings_on = False
 flower = None
 
 #grid
-cell_grid = None
+cell_grid = None #holds 
 board = None
 
 random_cells = None # this will be used to randomize board

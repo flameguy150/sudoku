@@ -3,7 +3,7 @@ from src.neo.config import globals
 from src.neo.config.constants import RED, TITLE_MENU_BG, GAME_BG, WHITE, BLACK, BLUE, GREEN, rr, gg, bb, dr, dg, db
 from src.neo.ui.flower import Flower
 from src.neo.core.board import _board
-from src.neo.utils.utilities import remake_puzzle, start_time, stop_time, display_time, display_mistakes
+from src.neo.utils.utilities import remake_puzzle, start_time, stop_time, display_time, display_mistakes, save_game
 from src.neo.utils.timer import Timer
 '''
 ------------------------   GAME STATE MANAGER  ------------------------   ------------------------   ------------------------   
@@ -41,6 +41,8 @@ class gameStateManager:
         if self.state == "menu":
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE: #ESCAPE = QUIT BUTTON
+                    # save game before exiting
+                    save_game()
                     globals.running = False
                 #if user accesses settings
                 elif event.key == pygame.K_s:

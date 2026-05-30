@@ -16,7 +16,7 @@ from src.neo.config.constants import WHITE, BLACK, FPS
 from src.neo.config import globals
 from src.neo.ui.gameState import gameStateManager
 from src.neo.core.grid import Grid
-from src.neo.utils.utilities import resource_path, mute_music, display_w_h, resize_font, remake_puzzle, hide_cells
+from src.neo.utils.utilities import resource_path, mute_music, display_w_h, resize_font, remake_puzzle, hide_cells, save_game, load_game
 from src.neo.utils.timer import Timer
 from src.neo.ui.flower import Flower
 
@@ -116,16 +116,22 @@ while globals.running:
         globals.curr_event = event
         
         if event.type == pygame.QUIT:
+            save_game()
             globals.running = False
         elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:
                      globals.mute_flag = not globals.mute_flag
                      mute_music()
+                ## DEBUGGING ↓
                 if event.key == pygame.K_f:
                       globals.screen_info = not globals.screen_info
+                if event.key == pygame.K_o:
+                      globals.grid.print_current_board()
+                if event.key == pygame.K_l:
+                      load_game()
 
 
-        # FOR WINDOW RESIZE
+        # FOR WINDOW RESIZE ↓
         elif event.type == pygame.VIDEORESIZE:
                 # Update screen dimensions and recreate the display surface
                 globals.WIDTH, globals.HEIGHT = event.w, event.h

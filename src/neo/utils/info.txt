@@ -1,5 +1,3 @@
-# save the array here
+PLAYER STATS 
 
-# save the total time here
-
-# save the current time here
+# save the total time here ↓↓↓

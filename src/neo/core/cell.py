@@ -92,6 +92,15 @@ class Cell:
                 print(globals.mistakes)
             else:
                 self.change_cell(WHITE, globals.holding_num)
+                
+                # update cell grid for save state
+
+                # first get index (x, y)
+                x = self.position // 9
+                y = self.position % 9
+
+                #then go into cell_grid[x][y] to update the number
+                globals.cell_grid[x][y].number = globals.holding_num
                 print("correct!")
     
 
